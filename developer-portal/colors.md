@@ -23,9 +23,9 @@ Find this section of the theme file.
     // tonalOffset: 0.2,
     primary: {
       main: '#227a88',
-      // light: ({ colors }) => lighten(colors.tonalOffset, colors.primary.main),
-      // dark: ({ colors }) => darken(colors.tonalOffset, colors.primary.main),
-      // contrastText: ({ colors }) => readableColor(colors.primary.main),
+      light: ({ colors }) => lighten(colors.tonalOffset, colors.primary.main),
+       dark: ({ colors }) => darken(colors.tonalOffset, colors.primary.main),
+       contrastText: ({ colors }) => readableColor(colors.primary.main),
     },
 ```
 
@@ -53,7 +53,7 @@ Or change any other colors you want.
 
 ```ts
     footer: {
-      main: '#424242',
+      main: '#227a88',
       // main: ({ colors }) => colors.primary.main,
       contrastText: 'white'
     },

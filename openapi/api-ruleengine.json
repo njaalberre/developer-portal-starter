@@ -1,0 +1,4257 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "Gjensidige.RuleEngine.Api.External",
+    "description": "This documentation is about the RuleEngine.Api.External API. Use this API instead of Ruleengine.Client if you can since it is based on .Net Core.",
+    "termsOfService": "None"
+  },
+  "basePath": "/Gjensidige.RuleEngine.Api.External",
+  "paths": {
+    "/api/endpoints/AnalyzedChatMessage/{countrycode}": {
+      "post": {
+        "tags": [
+          "AnalyzedChatMessage"
+        ],
+        "operationId": "Process",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "jobject",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "object"
+            }
+          },
+          {
+            "name": "countrycode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "correlationId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "INTERNETT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/endpoints/antimoneylaundering/{countrycode}": {
+      "post": {
+        "tags": [
+          "AntiMoneyLaundering"
+        ],
+        "summary": "Call endpoint AntiMoneyLaundering in Ruleengine",
+        "operationId": "Post",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "description": "Payload as json data",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/AntiMoneyLaunderingPayload"
+            }
+          },
+          {
+            "name": "countrycode",
+            "in": "path",
+            "description": "no",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "INTERNETT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AmlResponseMessage"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/AmlResponseMessage"
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "$ref": "#/definitions/AmlResponseMessage"
+            }
+          }
+        }
+      }
+    },
+    "/api/endpoints/calculatorAvailability/{countryCode}/{baseRisk}/{insuranceNumber}/{sequenceNumber}": {
+      "get": {
+        "tags": [
+          "CalculatorAvailability"
+        ],
+        "operationId": "CheckCalculatorAvailability",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "insuranceNumber",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sequenceNumber",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "countryCode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "baseRisk",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/api/endpoints/calculatorResult/{countrycode}/{baseRisk}": {
+      "post": {
+        "tags": [
+          "CalculatorResult"
+        ],
+        "operationId": "SaveCalculatorResult",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CalculatorResult"
+            }
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "countrycode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "baseRisk",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/api/endpoints/claimreceipt/{countrycode}": {
+      "post": {
+        "tags": [
+          "ClaimReceiptEndpoint"
+        ],
+        "operationId": "Post",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ClaimReceiptPayload"
+            }
+          },
+          {
+            "name": "countrycode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "correlationId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "INTERNETT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/endpoints/communication/letter/{countrycode}": {
+      "post": {
+        "tags": [
+          "Communication"
+        ],
+        "operationId": "Post",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CommunicationPayload"
+            }
+          },
+          {
+            "name": "countrycode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "INTERNETT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/endpoints/corporateclaims/{countrycode}/{insurancenumber}/{incidentsequencenumber}": {
+      "post": {
+        "tags": [
+          "CorporateClaims"
+        ],
+        "operationId": "SaveCorporateClaimsController",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "command",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/SaveProcessResultCorporateClaimsCommand"
+            }
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "countrycode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "insurancenumber",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "incidentsequencenumber",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/api/endpoints/bus/createActivity/{countrycode}": {
+      "post": {
+        "tags": [
+          "CreateActivityControll"
+        ],
+        "operationId": "Post",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CreateActivityInputPayLoad"
+            }
+          },
+          {
+            "name": "countrycode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "correlationId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "INTERNETT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/endpoints/bus/createActivityWithAnnotation/{countrycode}": {
+      "post": {
+        "tags": [
+          "CreateActivityControll"
+        ],
+        "operationId": "PostActivityWithAnnotation",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CreateActivitySkadeHubPayload"
+            }
+          },
+          {
+            "name": "countrycode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "correlationId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "INTERNETT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/endpoints/bus/createTaskWithSubjectLike/{countrycode}": {
+      "post": {
+        "tags": [
+          "CreateActivityControll"
+        ],
+        "operationId": "PostCreateTaskWithSubjectLike",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CreateActivityInputPayLoad"
+            }
+          },
+          {
+            "name": "countrycode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "correlationId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "INTERNETT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/endpoints/bus/closeTaskWithSubjectLike/{countrycode}": {
+      "post": {
+        "tags": [
+          "CreateActivityControll"
+        ],
+        "operationId": "DoCloseTaskWithSubjectLike",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CloseActivityWithSubjectLikePayload"
+            }
+          },
+          {
+            "name": "countrycode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "correlationId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "INTERNETT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/endpoints/bus/closeNewDamageActivity/{countrycode}": {
+      "post": {
+        "tags": [
+          "CreateActivityControll"
+        ],
+        "operationId": "DoCloseNewDamageActivity",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/BasicSkadePayload"
+            }
+          },
+          {
+            "name": "countrycode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "correlationId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "INTERNETT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/endpoints/bus/setClaimScoreInDynamics/{countrycode}": {
+      "post": {
+        "tags": [
+          "CreateActivityControll"
+        ],
+        "operationId": "DoSetClaimScoreInDynamics",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ClaimScoreInDynamicsPayload"
+            }
+          },
+          {
+            "name": "countrycode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "correlationId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "INTERNETT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/endpoints/bus/fraudFilter/{countrycode}": {
+      "post": {
+        "tags": [
+          "FraudFilter"
+        ],
+        "operationId": "Post",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/FraudFilterPayload"
+            }
+          },
+          {
+            "name": "countrycode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "correlationId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "INTERNETT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "405": {
+            "description": "Method Not Allowed"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/api/endpoints/fraudfilter/{countrycode}": {
+      "post": {
+        "tags": [
+          "FraudFilterEndpoint"
+        ],
+        "operationId": "Post",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/FraudFilterPayload"
+            }
+          },
+          {
+            "name": "countrycode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "correlationId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "INTERNETT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/endpoints/healthassessmentautomation/{countrycode}/execution": {
+      "post": {
+        "tags": [
+          "HealthAssessmentAutomation"
+        ],
+        "summary": "Obosloete - can be removed when new health assessemtn application is out.\r\nUsed for automation of health assessments. Payload is not to be logged, due to sensitive data.",
+        "operationId": "HealthAssessmentAutomation",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/SelfDeclaration"
+            }
+          },
+          {
+            "name": "countrycode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "correlationId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "INTERNETT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/api/endpoints/healthassessmentautomation/{countrycode}": {
+      "post": {
+        "tags": [
+          "HealthAssessmentAutomation"
+        ],
+        "summary": "Used for automation of health assessments. Payload is not to be logged, due to sensitive data.",
+        "operationId": "HealthAssessmentAutomation_v2",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/SelfDeclaration"
+            }
+          },
+          {
+            "name": "countrycode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "correlationId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "INTERNETT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ResponseHealthAssessment"
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "$ref": "#/definitions/ResponseHealthAssessment"
+            }
+          },
+          "501": {
+            "description": "Server Error",
+            "schema": {
+              "$ref": "#/definitions/ResponseHealthAssessment"
+            }
+          }
+        }
+      }
+    },
+    "/api/endpoints/minorclaim/{countrycode}": {
+      "post": {
+        "tags": [
+          "MinorClaim"
+        ],
+        "operationId": "Post",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/MinorClaimPayload"
+            }
+          },
+          {
+            "name": "countrycode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "INTERNETT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/ping": {
+      "get": {
+        "tags": [
+          "Ping"
+        ],
+        "operationId": "Get",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "INTERNETT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PingOkResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/ping/claimsqueueservice": {
+      "get": {
+        "tags": [
+          "Ping"
+        ],
+        "operationId": "PingClaimsQueueServiceFromRe",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "INTERNETT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/api/psv/baserisks/{baserisknr}/events/{eventcode}": {
+      "get": {
+        "tags": [
+          "Psv"
+        ],
+        "operationId": "GetPsvForBaseriskEventAndCoverages",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "baserisknr",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventcode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "coverageslist",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "INTERNETT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/api/psv/baserisks/{baserisknr}/events/{eventcode}/{incidentcode}": {
+      "get": {
+        "tags": [
+          "Psv"
+        ],
+        "operationId": "GetPsvForBaseriskEventIncidentAndCoverages",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "baserisknr",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventcode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "incidentcode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "coverageslist",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "INTERNETT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/api/endpoints/riskmanagementsave/{countrycode}": {
+      "post": {
+        "tags": [
+          "RiskManagementSave"
+        ],
+        "summary": "This method saves risk management assessment.",
+        "operationId": "SaveRiskManagement",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "jobject",
+            "in": "body",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "object"
+            }
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "countrycode",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/api/endpoints/riskmanagementsender/{countrycode}/{referenceNr}": {
+      "post": {
+        "tags": [
+          "RiskManagementSender"
+        ],
+        "summary": "This method initialise/reminds risk management assessment.",
+        "operationId": "SendRiskManagementMessage",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "riskManagementCommand",
+            "in": "body",
+            "description": "",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/RiskManagementCommand"
+            }
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "countrycode",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "referenceNr",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/api/endpoints/processresult/save/{countrycode}": {
+      "post": {
+        "tags": [
+          "SaveProcessResult"
+        ],
+        "operationId": "ProcessResultSaveCommon",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "jobject",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "object"
+            }
+          },
+          {
+            "name": "countrycode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "correlationId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "INTERNETT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/endpoints/processresult/homeseller/save/{countrycode}": {
+      "post": {
+        "tags": [
+          "SaveProcessResultHomeSeller"
+        ],
+        "operationId": "SaveProcessResultAsync",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "jobject",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "object"
+            }
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "countrycode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/api/endpoints/processresult/vehicle/{countrycode}/{insurancenumber}/{incidentsequencenumber}/async": {
+      "post": {
+        "tags": [
+          "SaveProcessResultVehicle"
+        ],
+        "operationId": "SaveProcessResultAsync",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "command",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/SaveProcessResultVehicleCommand"
+            }
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "countrycode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "insurancenumber",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "incidentsequencenumber",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/api/endpoints/processresult/vehicle/{countrycode}/{insurancenumber}/{incidentsequencenumber}": {
+      "post": {
+        "tags": [
+          "SaveProcessResultVehicle"
+        ],
+        "operationId": "SaveProcessResult",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "command",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/SaveProcessResultVehicleCommand"
+            }
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "countrycode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "insurancenumber",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "incidentsequencenumber",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/api/endpoints/bus/updateIncidentWithScalepointData/{countrycode}": {
+      "post": {
+        "tags": [
+          "Scalepoint"
+        ],
+        "operationId": "UpdateIncidentForScalepoint",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ScalepointIncidentPayload"
+            }
+          },
+          {
+            "name": "countrycode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "correlationId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "INTERNETT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/endpoints/sendCommunication/{countrycode}": {
+      "post": {
+        "tags": [
+          "SendCommunication"
+        ],
+        "summary": "Call endpoint SendCommunication in Ruleengine",
+        "operationId": "Post",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "description": "Payload as json data",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/SendCommunicationPayload"
+            }
+          },
+          {
+            "name": "countrycode",
+            "in": "path",
+            "description": "no",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "INTERNETT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/api/endpoints/bus/skadehub/{countrycode}": {
+      "post": {
+        "tags": [
+          "SkadeHub"
+        ],
+        "summary": "Call endpoint SkadeHub in Ruleengine on behalf of NserviceBus",
+        "operationId": "Post",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "description": "Payload as json data",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/SkadeHubPayload"
+            }
+          },
+          {
+            "name": "countrycode",
+            "in": "path",
+            "description": "no",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "INTERNETT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/endpoints/skadehub/{countrycode}": {
+      "post": {
+        "tags": [
+          "SkadeHubControllerQueue"
+        ],
+        "summary": "Call endpoint SkadeHub in Ruleengine, via NServiceBus",
+        "operationId": "Post",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "description": "Payload as json data",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/SkadeHubPayload"
+            }
+          },
+          {
+            "name": "countrycode",
+            "in": "path",
+            "description": "no",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "INTERNETT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OkResponseSkadeHub"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseSkadeHub"
+            }
+          }
+        }
+      }
+    },
+    "/api/endpoints/bus/skadescore/{countrycode}": {
+      "post": {
+        "tags": [
+          "SkadeScore"
+        ],
+        "summary": "Save to Skadescore endpoint with SkadeScorePayload",
+        "operationId": "Post",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "description": "SkadeScorePayload as json object",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/SkadeScorePayload"
+            }
+          },
+          {
+            "name": "countrycode",
+            "in": "path",
+            "description": "no, dk, se, fi. Only support no for now",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "INTERNETT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/endpoints/skadescore/{countrycode}": {
+      "post": {
+        "tags": [
+          "SkadeScoreControllerAsync"
+        ],
+        "operationId": "Post",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/SkadeScorePayload"
+            }
+          },
+          {
+            "name": "countrycode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "correlationId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "INTERNETT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/endpoints/bus/updateIncidentWithSmartregressData/{countrycode}": {
+      "post": {
+        "tags": [
+          "SmartRegress"
+        ],
+        "operationId": "UpdateIncidentForSmartRegress",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/SmartRegressIncidentPayload"
+            }
+          },
+          {
+            "name": "countrycode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "correlationId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "INTERNETT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/endpoints/teliamobile/{countrycode}": {
+      "post": {
+        "tags": [
+          "TeliaMobile"
+        ],
+        "summary": "Call endpoint TeliaMobile in Ruleengine",
+        "operationId": "Post",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "description": "Payload as json data",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/TeliaPayload"
+            }
+          },
+          {
+            "name": "countrycode",
+            "in": "path",
+            "description": "no",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "INTERNETT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/endpoints/bus/teliamobile/verifyAndSendConfirmation/{countrycode}": {
+      "post": {
+        "tags": [
+          "TeliaMobile"
+        ],
+        "summary": "Call endpoint TeliaMobile in Ruleengine",
+        "operationId": "VerifyCaseIsOkInNavisionAndSendConfirmation",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "description": "Payload as json data",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/TeliaPayload"
+            }
+          },
+          {
+            "name": "countrycode",
+            "in": "path",
+            "description": "no",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "INTERNETT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/endpoints/test/letter/{countrycode}": {
+      "post": {
+        "tags": [
+          "Test"
+        ],
+        "operationId": "Post",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CommunicationPayload"
+            }
+          },
+          {
+            "name": "countrycode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "INTERNETT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/endpoints/treatmentinsurance/v2/{countrycode}": {
+      "post": {
+        "tags": [
+          "TreatmentInsuranceEndpoint"
+        ],
+        "operationId": "PostTreatmentInsurance",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/TreatmentInsuranceRequest"
+            }
+          },
+          {
+            "name": "countrycode",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "correlationId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "INTERNETT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/api/endpoints/treatmentinsurance/{countrycode}": {
+      "post": {
+        "tags": [
+          "TreatmentInsuranceEndpoint"
+        ],
+        "summary": "Must keep old code unntil new client is ready for production\r\nSeems like this is not in use anymore - 28.09.2020",
+        "operationId": "Post",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "body",
+            "description": "",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/TreatmentInsurancePayload"
+            }
+          },
+          {
+            "name": "countrycode",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "correlationId",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "applicationId",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "INTERNETT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AntiMoneyLaunderingPayload": {
+      "type": "object",
+      "properties": {
+        "applicationId": {
+          "type": "string"
+        },
+        "insuranceNumber": {
+          "type": "string"
+        },
+        "riskNumber": {
+          "type": "string"
+        },
+        "claimOwnerPartRef": {
+          "type": "string"
+        },
+        "triggeringGIdent": {
+          "type": "string"
+        },
+        "internalAml": {
+          "$ref": "#/definitions/InternalAml"
+        },
+        "referenceForDiagnostics": {
+          "type": "string",
+          "readOnly": true
+        },
+        "processCode": {
+          "type": "string"
+        },
+        "questions": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Questions"
+          }
+        },
+        "category": {
+          "$ref": "#/definitions/Category"
+        },
+        "incidentDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "difficultyCode": {
+          "type": "string"
+        }
+      }
+    },
+    "InternalAml": {
+      "type": "object",
+      "properties": {
+        "amlScore": {
+          "format": "double",
+          "type": "number"
+        },
+        "amlClass": {
+          "type": "string"
+        },
+        "processGuideScore": {
+          "type": "string"
+        }
+      }
+    },
+    "Questions": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "answers": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Answers"
+          }
+        }
+      }
+    },
+    "Category": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string"
+        },
+        "subDomain": {
+          "type": "string"
+        }
+      }
+    },
+    "Answers": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        },
+        "sequence": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "AmlResponseMessage": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "message": {
+          "type": "string"
+        },
+        "okToUpdateS2000WithAmlResult": {
+          "type": "boolean"
+        },
+        "detailedS2000Message": {
+          "type": "string"
+        }
+      }
+    },
+    "CalculatorResult": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "version": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "calculatorVersionGuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "isLocked": {
+          "type": "boolean"
+        },
+        "actorId": {
+          "type": "string"
+        },
+        "actorType": {
+          "type": "string"
+        },
+        "lastUpdated": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "claim": {
+          "$ref": "#/definitions/Claim"
+        },
+        "calculatorTypeResults": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CalculatorTypeResult"
+          }
+        },
+        "created": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastUpdatedBy": {
+          "type": "string"
+        },
+        "sequenceNumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "score": {
+          "type": "string"
+        }
+      }
+    },
+    "Claim": {
+      "type": "object",
+      "properties": {
+        "regardingType": {
+          "type": "string"
+        },
+        "regardingValue": {
+          "type": "string"
+        }
+      }
+    },
+    "CalculatorTypeResult": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "calculatorResultId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "calculatorTypeId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "rows": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResultRow"
+          }
+        },
+        "extras": {
+          "$ref": "#/definitions/Extras"
+        }
+      }
+    },
+    "ResultRow": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "number": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "calculatorTypeResultId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "values": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResultRowValue"
+          }
+        },
+        "type": {
+          "enum": [
+            "Column",
+            "Summary",
+            "Header"
+          ],
+          "type": "string"
+        },
+        "s2000RowNumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "udbCode": {
+          "type": "string"
+        }
+      }
+    },
+    "Extras": {
+      "type": "object",
+      "properties": {
+        "integration": {
+          "$ref": "#/definitions/Integration"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Extensions"
+        }
+      }
+    },
+    "ResultRowValue": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "calculatorTemplateId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "calculatorResultRowId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "score": {
+          "type": "string"
+        }
+      }
+    },
+    "Integration": {
+      "type": "object",
+      "properties": {
+        "isActive": {
+          "type": "boolean"
+        },
+        "defaultVisibilityKey": {
+          "type": "string"
+        },
+        "integrationVisibilityKey": {
+          "type": "string"
+        },
+        "controlFieldId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "templates": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IntegrationColumn"
+          }
+        },
+        "relevantLookupValues": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IntegrationLookupValue"
+          }
+        },
+        "products": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductSearch"
+          }
+        }
+      }
+    },
+    "Extensions": {
+      "type": "object",
+      "properties": {
+        "multiValueResultLines": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MultiValueResultLine"
+          }
+        }
+      }
+    },
+    "IntegrationColumn": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "visibility": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "IntegrationLookupValue": {
+      "type": "object",
+      "properties": {
+        "lookupValueCode": {
+          "type": "string"
+        },
+        "lookupValueId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "productGroups": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpptecProductGroup"
+          }
+        }
+      }
+    },
+    "ProductSearch": {
+      "type": "object",
+      "properties": {
+        "rowId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "selectedItem": {
+          "$ref": "#/definitions/UpptecItem"
+        },
+        "replacementItem": {
+          "$ref": "#/definitions/UpptecItem"
+        },
+        "productGroup": {
+          "$ref": "#/definitions/ProductGroup"
+        },
+        "store": {
+          "$ref": "#/definitions/Store"
+        }
+      }
+    },
+    "MultiValueResultLine": {
+      "type": "object",
+      "properties": {
+        "resultRowValueIds": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "UpptecProductGroup": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "UpptecItem": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string"
+        },
+        "brand": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "ProductGroup": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "categories": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        }
+      }
+    },
+    "Store": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "price": {
+          "format": "double",
+          "type": "number"
+        }
+      }
+    },
+    "ClaimReceiptPayload": {
+      "type": "object",
+      "properties": {
+        "claimReporterPartRef": {
+          "type": "string"
+        },
+        "claimOwnerPartRef": {
+          "type": "string"
+        },
+        "claimReceiptProcessResult": {
+          "$ref": "#/definitions/ClaimReceiptProcessResult"
+        },
+        "fromSoa": {
+          "$ref": "#/definitions/SkadeScoreInput"
+        },
+        "dontGetDataFromSoa": {
+          "type": "boolean"
+        },
+        "customLetterData": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "insuranceNumber": {
+          "type": "string"
+        },
+        "incidentSequenceNumber": {
+          "type": "string"
+        },
+        "applicationId": {
+          "type": "string"
+        },
+        "referenceForDiagnostics": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ClaimReceiptProcessResult": {
+      "type": "object",
+      "properties": {
+        "processCode": {
+          "type": "string"
+        },
+        "questions": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Questions"
+          }
+        },
+        "category": {
+          "$ref": "#/definitions/Category"
+        },
+        "incidentDate": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "SkadeScoreInput": {
+      "type": "object",
+      "properties": {
+        "grunnrisikoNummer": {
+          "type": "string"
+        },
+        "hendelsesKode": {
+          "type": "string"
+        },
+        "ulykkesKodeGruppe": {
+          "type": "string"
+        },
+        "ulykkesKode": {
+          "type": "string"
+        },
+        "processguideId": {
+          "type": "string"
+        },
+        "processguideScore": {
+          "type": "string"
+        },
+        "erstatningsPlikt": {
+          "type": "string"
+        },
+        "erstatningsSumAvklart": {
+          "type": "string"
+        },
+        "svikscore": {
+          "type": "string"
+        },
+        "totalKrav": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "skadestatus": {
+          "type": "string"
+        },
+        "skadearter": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Skadeart"
+          }
+        }
+      }
+    },
+    "Skadeart": {
+      "type": "object",
+      "properties": {
+        "kode": {
+          "type": "string"
+        },
+        "navn": {
+          "type": "string"
+        }
+      }
+    },
+    "CommunicationPayload": {
+      "type": "object",
+      "properties": {
+        "applicationId": {
+          "type": "string"
+        },
+        "correlationId": {
+          "type": "string"
+        },
+        "letterTemplateId": {
+          "type": "string"
+        },
+        "insuranceNumber": {
+          "type": "string"
+        },
+        "claimNumber": {
+          "type": "string"
+        },
+        "customerNumber": {
+          "type": "string"
+        },
+        "communicationType": {
+          "enum": [
+            "Letter",
+            "Mail",
+            "Sms"
+          ],
+          "type": "string"
+        },
+        "part": {
+          "$ref": "#/definitions/PartEmailSmsLetter"
+        },
+        "referenceForDiagnostics": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PartEmailSmsLetter": {
+      "type": "object",
+      "properties": {
+        "partRef": {
+          "type": "string"
+        },
+        "idNumber": {
+          "type": "string"
+        },
+        "firstname": {
+          "type": "string"
+        },
+        "lastname": {
+          "type": "string"
+        },
+        "companyName": {
+          "type": "string"
+        },
+        "addressline1": {
+          "type": "string"
+        },
+        "addressline2": {
+          "type": "string"
+        },
+        "addressline3": {
+          "type": "string"
+        },
+        "zipCode": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "addressType": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "mobile": {
+          "type": "string"
+        }
+      }
+    },
+    "SaveProcessResultCorporateClaimsCommand": {
+      "required": [
+        "claimReporterPartRef",
+        "claimOwnerPartRef",
+        "incidentDate",
+        "subDomain",
+        "processCode",
+        "questions"
+      ],
+      "type": "object",
+      "properties": {
+        "claimReporterPartRef": {
+          "type": "string"
+        },
+        "claimOwnerPartRef": {
+          "type": "string"
+        },
+        "incidentDate": {
+          "format": "date",
+          "type": "string"
+        },
+        "eventCode": {
+          "type": "string"
+        },
+        "damageCode": {
+          "type": "string"
+        },
+        "subDomain": {
+          "type": "string"
+        },
+        "processCode": {
+          "type": "string"
+        },
+        "questions": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BasicQuestions"
+          }
+        },
+        "riskNumber": {
+          "type": "string"
+        },
+        "productCode": {
+          "type": "string"
+        },
+        "productName": {
+          "type": "string"
+        },
+        "insuranceNumber": {
+          "type": "string"
+        }
+      }
+    },
+    "BasicQuestions": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "answers": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BasicAnswers"
+          }
+        }
+      }
+    },
+    "BasicAnswers": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "sequence": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "CreateActivityInputPayLoad": {
+      "type": "object",
+      "properties": {
+        "subject": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "dueInDays": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "relatedValue": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "applicationId": {
+          "type": "string"
+        },
+        "insuranceNumber": {
+          "type": "string"
+        },
+        "incidentSequenceNumber": {
+          "type": "string"
+        },
+        "insuranceNo": {
+          "type": "string"
+        },
+        "sequenceNo": {
+          "type": "string"
+        }
+      }
+    },
+    "CreateActivitySkadeHubPayload": {
+      "type": "object",
+      "properties": {
+        "applicationId": {
+          "type": "string"
+        },
+        "insuranceNumber": {
+          "type": "string"
+        },
+        "incidentSequenceNumber": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "dueInDays": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "relatedValue": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "addAnnotation": {
+          "type": "boolean"
+        },
+        "annotationHeader": {
+          "type": "string"
+        },
+        "annotationDescription": {
+          "type": "string"
+        },
+        "sendActivityToCounterPart": {
+          "type": "boolean"
+        },
+        "counterPartInsuranceNumber": {
+          "type": "string"
+        },
+        "counterPartIncidentSequenceNumber": {
+          "type": "string"
+        }
+      }
+    },
+    "CloseActivityWithSubjectLikePayload": {
+      "type": "object",
+      "properties": {
+        "applicationId": {
+          "type": "string"
+        },
+        "insuranceNumber": {
+          "type": "string"
+        },
+        "incidentSequenceNumber": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "string"
+        }
+      }
+    },
+    "BasicSkadePayload": {
+      "type": "object",
+      "properties": {
+        "applicationId": {
+          "type": "string"
+        },
+        "insuranceNumber": {
+          "type": "string"
+        },
+        "incidentSequenceNumber": {
+          "type": "string"
+        },
+        "referenceForDiagnostics": {
+          "type": "string",
+          "readOnly": true
+        },
+        "forsikringsNr": {
+          "type": "string"
+        },
+        "skadeNr": {
+          "type": "string"
+        }
+      }
+    },
+    "ClaimScoreInDynamicsPayload": {
+      "type": "object",
+      "properties": {
+        "applicationId": {
+          "type": "string"
+        },
+        "insuranceNumber": {
+          "type": "string"
+        },
+        "incidentSequenceNumber": {
+          "type": "string"
+        },
+        "claimScore": {
+          "type": "string"
+        }
+      }
+    },
+    "FraudFilterPayload": {
+      "type": "object",
+      "properties": {
+        "applicationId": {
+          "type": "string"
+        },
+        "correlationId": {
+          "type": "string"
+        },
+        "insuranceNumber": {
+          "type": "string"
+        },
+        "incidentSequenceNumber": {
+          "type": "string"
+        },
+        "baseRiskNumber": {
+          "type": "string"
+        },
+        "claimReported": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "claimAmount": {
+          "format": "double",
+          "type": "number"
+        },
+        "claimCauseCode": {
+          "type": "string"
+        },
+        "claimType": {
+          "type": "string"
+        },
+        "processGuideCode": {
+          "type": "string"
+        },
+        "processGuideColor": {
+          "type": "string"
+        },
+        "fraudFilterProbability": {
+          "format": "double",
+          "type": "number"
+        },
+        "fraudFilterSegment": {
+          "type": "string"
+        },
+        "fraudFilterVolumeSegment": {
+          "type": "string"
+        },
+        "fraudFilterCategory": {
+          "type": "string"
+        },
+        "fraudFilterHints": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FraudFilterCodeDescription"
+          }
+        },
+        "referenceForDiagnostics": {
+          "type": "string",
+          "readOnly": true
+        },
+        "userWhoTriggeredScore": {
+          "type": "string"
+        },
+        "claimInsuranceNo": {
+          "type": "string"
+        },
+        "claimSeqNo": {
+          "type": "string"
+        }
+      }
+    },
+    "FraudFilterCodeDescription": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "score": {
+          "format": "double",
+          "type": "number"
+        }
+      }
+    },
+    "SelfDeclaration": {
+      "type": "object",
+      "properties": {
+        "applicationId": {
+          "type": "string"
+        },
+        "processCode": {
+          "type": "string"
+        },
+        "regarding": {
+          "$ref": "#/definitions/Regarding"
+        },
+        "questions": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Questions"
+          }
+        },
+        "category": {
+          "$ref": "#/definitions/Category"
+        },
+        "helseerklaring": {
+          "$ref": "#/definitions/Helseerklaring"
+        },
+        "internalData": {
+          "$ref": "#/definitions/InternalData"
+        },
+        "referenceForDiagnostics": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Regarding": {
+      "type": "object",
+      "properties": {
+        "accountNumber": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "incidentDetail": {
+          "$ref": "#/definitions/IncidentDetail"
+        },
+        "customerDetail": {
+          "$ref": "#/definitions/CustomerDetail"
+        },
+        "referenceNumber": {
+          "type": "string"
+        }
+      }
+    },
+    "Helseerklaring": {
+      "type": "object",
+      "properties": {
+        "forsikringRisikonummerList": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ForsikringRisikonummerList"
+          }
+        },
+        "forsikretPartref": {
+          "type": "string"
+        },
+        "prosessguideKode": {
+          "type": "string"
+        },
+        "forsikretNavn": {
+          "type": "string"
+        },
+        "signerersNavn": {
+          "type": "string"
+        },
+        "signerersIdnr": {
+          "type": "string"
+        },
+        "forsikretKundenummer": {
+          "type": "string"
+        },
+        "barneerklaring": {
+          "type": "boolean"
+        },
+        "risikoNummer": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "InternalData": {
+      "type": "object",
+      "properties": {
+        "isAutomated": {
+          "type": "boolean"
+        }
+      }
+    },
+    "IncidentDetail": {
+      "type": "object",
+      "properties": {
+        "insuranceNumber": {
+          "type": "string"
+        },
+        "incidentSequenceNumber": {
+          "type": "string"
+        },
+        "incidentDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "eventCode": {
+          "type": "string"
+        },
+        "damageCode": {
+          "type": "string"
+        },
+        "scalepointType": {
+          "type": "string"
+        },
+        "caseType": {
+          "type": "string"
+        },
+        "riskNumber": {
+          "type": "string"
+        },
+        "baseRiskNumber": {
+          "type": "string"
+        },
+        "incidientSequenceNumber": {
+          "type": "string"
+        }
+      }
+    },
+    "CustomerDetail": {
+      "type": "object",
+      "properties": {
+        "customerNumber": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "emailAddress": {
+          "type": "string"
+        },
+        "phoneNumber": {
+          "type": "string"
+        },
+        "clientFullName": {
+          "type": "string"
+        }
+      }
+    },
+    "ForsikringRisikonummerList": {
+      "type": "object",
+      "properties": {
+        "risikoNummer": {
+          "type": "string"
+        },
+        "forsikringsNummer": {
+          "type": "string"
+        }
+      }
+    },
+    "ResponseHealthAssessment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "isAutomated": {
+          "type": "boolean"
+        }
+      }
+    },
+    "MinorClaimPayload": {
+      "type": "object",
+      "properties": {
+        "cvrNumber": {
+          "type": "string"
+        },
+        "reviewerTypeCode": {
+          "type": "string"
+        },
+        "occupationCode": {
+          "type": "string"
+        },
+        "absenceCode": {
+          "type": "string"
+        },
+        "incidentType": {
+          "type": "string"
+        },
+        "applicationId": {
+          "type": "string"
+        },
+        "correlationId": {
+          "type": "string"
+        },
+        "referenceForDiagnostics": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PingOkResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "assemblyName": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "buildDate": {
+          "type": "string"
+        },
+        "runDate": {
+          "type": "string"
+        }
+      }
+    },
+    "RiskManagementCommand": {
+      "description": "RiskManagement Send/Resent input command",
+      "type": "object",
+      "properties": {
+        "customerEmailAddress": {
+          "type": "string"
+        },
+        "customerPhoneNumber": {
+          "type": "string"
+        },
+        "partRef": {
+          "type": "string"
+        },
+        "processCode": {
+          "type": "string"
+        },
+        "clientFullName": {
+          "type": "string"
+        }
+      }
+    },
+    "SaveProcessResultVehicleCommand": {
+      "required": [
+        "claimReporterPartRef",
+        "claimOwnerPartRef",
+        "incidentDate",
+        "eventCode",
+        "damageCode",
+        "processCode",
+        "questions"
+      ],
+      "type": "object",
+      "properties": {
+        "claimReporterPartRef": {
+          "type": "string"
+        },
+        "claimOwnerPartRef": {
+          "type": "string"
+        },
+        "incidentDate": {
+          "format": "date",
+          "type": "string"
+        },
+        "eventCode": {
+          "type": "string"
+        },
+        "damageCode": {
+          "type": "string"
+        },
+        "processCode": {
+          "type": "string"
+        },
+        "questions": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BasicQuestions"
+          }
+        }
+      }
+    },
+    "ScalepointIncidentPayload": {
+      "type": "object",
+      "properties": {
+        "applicationId": {
+          "type": "string"
+        },
+        "insuranceNumber": {
+          "type": "string"
+        },
+        "incidentSequenceNumber": {
+          "type": "string"
+        },
+        "success": {
+          "type": "boolean"
+        },
+        "url": {
+          "type": "string"
+        },
+        "caseType": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        },
+        "insuranceNo": {
+          "type": "string"
+        },
+        "sequenceNo": {
+          "type": "string"
+        }
+      }
+    },
+    "SendCommunicationPayload": {
+      "type": "object",
+      "properties": {
+        "applicationId": {
+          "type": "string"
+        },
+        "insuranceNumber": {
+          "type": "string"
+        },
+        "incidentSequenceNumber": {
+          "type": "string"
+        },
+        "primaryEventCode": {
+          "type": "string"
+        },
+        "incidentDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "claimOwnerPartRef": {
+          "type": "string"
+        },
+        "baseRiskNumber": {
+          "type": "string"
+        },
+        "productRiskNumber": {
+          "type": "string"
+        },
+        "referenceForDiagnostics": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SkadeHubPayload": {
+      "type": "object",
+      "properties": {
+        "applicationId": {
+          "type": "string"
+        },
+        "gident": {
+          "type": "string"
+        },
+        "insuranceNumber": {
+          "type": "string"
+        },
+        "incidentSequenceNumber": {
+          "type": "string"
+        },
+        "claimReporterPartRef": {
+          "type": "string"
+        },
+        "claimOwnerPartRef": {
+          "type": "string"
+        },
+        "eventType": {
+          "enum": [
+            "ERROR",
+            "HUB_EVENT",
+            "MESSAGE"
+          ],
+          "type": "string"
+        },
+        "hubData": {
+          "$ref": "#/definitions/HubData"
+        },
+        "errorData": {
+          "$ref": "#/definitions/ErrorData"
+        },
+        "messageData": {
+          "$ref": "#/definitions/MessageData"
+        },
+        "messageFromSkadeHub": {
+          "type": "string"
+        },
+        "eventAlreadyExists": {
+          "type": "boolean"
+        },
+        "referenceForDiagnostics": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "HubData": {
+      "type": "object",
+      "properties": {
+        "hubId": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "partId": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "hubEventType": {
+          "enum": [
+            "UNKNOWN",
+            "INCIDENT_CREATED",
+            "SOLUTION_PROPOSED",
+            "INCIDENT_REJECTED",
+            "INCIDENT_WITHDRAWN",
+            "SOLUTION_ACCEPTED",
+            "UPDATE_INFO",
+            "CLAIM_ADDED",
+            "COMMENT_ADDED",
+            "ATTACHMENT_ADDED"
+          ],
+          "type": "string"
+        },
+        "author": {
+          "$ref": "#/definitions/HubAuthor"
+        },
+        "comment": {
+          "$ref": "#/definitions/HubComment"
+        },
+        "attachment": {
+          "$ref": "#/definitions/HubAttachment"
+        },
+        "event": {
+          "$ref": "#/definitions/HubEvent"
+        },
+        "otherPart": {
+          "$ref": "#/definitions/HubOtherPart"
+        }
+      }
+    },
+    "ErrorData": {
+      "type": "object",
+      "properties": {
+        "errorType": {
+          "type": "string"
+        },
+        "errorText": {
+          "type": "string"
+        },
+        "extraInfo": {
+          "type": "string"
+        }
+      }
+    },
+    "MessageData": {
+      "type": "object",
+      "properties": {
+        "messageType": {
+          "enum": [
+            "UNKNOWN",
+            "NOT_IN_HUB"
+          ],
+          "type": "string"
+        },
+        "messageText": {
+          "type": "string"
+        },
+        "extraInfo": {
+          "type": "string"
+        }
+      }
+    },
+    "HubAuthor": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "insuranceProviderId": {
+          "type": "string"
+        },
+        "insuranceProviderCode": {
+          "type": "string"
+        },
+        "insuranceProviderName": {
+          "type": "string"
+        },
+        "internalRef": {
+          "type": "string"
+        }
+      }
+    },
+    "HubComment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "created": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        }
+      }
+    },
+    "HubAttachment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "created": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "filename": {
+          "type": "string"
+        },
+        "size": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "url": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "HubEvent": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "eventTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "eventData": {
+          "type": "object"
+        }
+      }
+    },
+    "HubOtherPart": {
+      "type": "object",
+      "properties": {
+        "partId": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "insuranceProviderCode": {
+          "type": "string"
+        },
+        "internalReference": {
+          "type": "string"
+        }
+      }
+    },
+    "OkResponseSkadeHub": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/definitions/ResponseData"
+        }
+      }
+    },
+    "ResponseData": {
+      "type": "object",
+      "properties": {
+        "insuranceNo": {
+          "type": "string"
+        },
+        "seqNo": {
+          "type": "string"
+        },
+        "reference": {
+          "type": "string"
+        },
+        "processCode": {
+          "type": "string"
+        },
+        "correlationId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "customData": {
+          "type": "object"
+        }
+      }
+    },
+    "ErrorResponseSkadeHub": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "errorResponse": {
+          "$ref": "#/definitions/Response"
+        }
+      }
+    },
+    "Response": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "stackTrace": {
+          "type": "string"
+        },
+        "data": {
+          "type": "string"
+        }
+      }
+    },
+    "SkadeScorePayload": {
+      "type": "object",
+      "properties": {
+        "applicationId": {
+          "type": "string"
+        },
+        "triggeringGIdent": {
+          "type": "string"
+        },
+        "claimReporterPartRef": {
+          "type": "string"
+        },
+        "claimOwnerPartRef": {
+          "type": "string"
+        },
+        "fromSoa": {
+          "$ref": "#/definitions/SkadeScoreInput"
+        },
+        "result": {
+          "$ref": "#/definitions/SkadeScoreResult"
+        },
+        "dontGetDataFromSoa": {
+          "type": "boolean"
+        },
+        "correlationId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "dbsInvoice": {
+          "$ref": "#/definitions/DbsInvoice"
+        },
+        "regress": {
+          "$ref": "#/definitions/Regress"
+        },
+        "regressPayout": {
+          "$ref": "#/definitions/RegressPayout"
+        },
+        "insuranceNumber": {
+          "type": "string"
+        },
+        "incidentSequenceNumber": {
+          "type": "string"
+        },
+        "referenceForDiagnostics": {
+          "type": "string",
+          "readOnly": true
+        },
+        "fraudScore": {
+          "$ref": "#/definitions/FraudScoreForSkadeScore"
+        },
+        "comparisonDocumentLink": {
+          "type": "string"
+        },
+        "specificProcessResult": {
+          "$ref": "#/definitions/SpecificProcessResult"
+        },
+        "claimProcessingType": {
+          "enum": [
+            "Default",
+            "ApprovedByClaimHandler"
+          ],
+          "type": "string"
+        },
+        "baseRiskNumber": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "forsikringNr": {
+          "type": "string"
+        },
+        "skadeNr": {
+          "type": "string"
+        },
+        "partRef": {
+          "type": "string"
+        }
+      }
+    },
+    "SkadeScoreResult": {
+      "type": "object",
+      "properties": {
+        "skadescore": {
+          "type": "string"
+        },
+        "calculatorScore": {
+          "type": "string"
+        },
+        "automaticPaymentResultCode": {
+          "type": "string"
+        },
+        "automaticPaymentResultDescription": {
+          "type": "string"
+        },
+        "automaticPaymentResultId": {
+          "type": "string"
+        }
+      }
+    },
+    "DbsInvoice": {
+      "type": "object",
+      "properties": {
+        "roleCode": {
+          "type": "string"
+        },
+        "dbsVersionNr": {
+          "type": "string"
+        },
+        "dbsOppdragsNr": {
+          "type": "string"
+        },
+        "tidlSkade": {
+          "type": "boolean"
+        },
+        "ansvar": {
+          "type": "boolean"
+        },
+        "draft": {
+          "$ref": "#/definitions/DbsInvoiceDraft"
+        }
+      }
+    },
+    "Regress": {
+      "type": "object",
+      "properties": {
+        "utestaendeBelop": {
+          "type": "boolean"
+        },
+        "ubetaltRegress": {
+          "type": "boolean"
+        },
+        "iKraft": {
+          "type": "boolean"
+        },
+        "forslag": {
+          "type": "string"
+        },
+        "avklart": {
+          "type": "boolean"
+        }
+      }
+    },
+    "RegressPayout": {
+      "type": "object",
+      "properties": {
+        "paymentStatus": {
+          "type": "string"
+        },
+        "responsibility": {
+          "type": "string"
+        },
+        "distributionFraction": {
+          "type": "string"
+        },
+        "kasko": {
+          "type": "boolean"
+        },
+        "productRiskNumber": {
+          "type": "string"
+        },
+        "recievedDbsTariffClaimOwner": {
+          "type": "boolean"
+        },
+        "recievedAndPaidDbsInvoiceClaimOwner": {
+          "type": "boolean"
+        },
+        "paidOutRentalCar": {
+          "type": "string"
+        },
+        "obligationToPayCompensation": {
+          "type": "string"
+        },
+        "recourseSequenceNumber": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "FraudScoreForSkadeScore": {
+      "type": "object",
+      "properties": {
+        "correlationId": {
+          "type": "string"
+        },
+        "fraudFilterSegment": {
+          "type": "string"
+        },
+        "fraudFilterProbability": {
+          "format": "double",
+          "type": "number"
+        },
+        "fraudFilterVolumeSegment": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "fraudFilterCategory": {
+          "type": "string"
+        },
+        "claimAmount": {
+          "format": "double",
+          "type": "number"
+        },
+        "claimType": {
+          "type": "string"
+        },
+        "claimReportedDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "fraudScoreHints": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FraudScoreHintsForSkadeScore"
+          }
+        }
+      }
+    },
+    "SpecificProcessResult": {
+      "type": "object",
+      "properties": {
+        "processCode": {
+          "type": "string"
+        },
+        "questions": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Questions"
+          }
+        },
+        "category": {
+          "$ref": "#/definitions/Category"
+        },
+        "incidentDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "difficultyCode": {
+          "type": "string"
+        }
+      }
+    },
+    "DbsInvoiceDraft": {
+      "type": "object",
+      "properties": {
+        "maksOversteget": {
+          "type": "boolean"
+        },
+        "motpart": {
+          "type": "boolean"
+        }
+      }
+    },
+    "FraudScoreHintsForSkadeScore": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "score": {
+          "format": "double",
+          "type": "number"
+        }
+      }
+    },
+    "SmartRegressIncidentPayload": {
+      "type": "object",
+      "properties": {
+        "applicationId": {
+          "type": "string"
+        },
+        "insuranceNumber": {
+          "type": "string"
+        },
+        "incidentSequenceNumber": {
+          "type": "string"
+        }
+      }
+    },
+    "TeliaPayload": {
+      "type": "object",
+      "properties": {
+        "applicationId": {
+          "type": "string"
+        },
+        "processCode": {
+          "type": "string"
+        },
+        "primaryEventCode": {
+          "type": "string"
+        },
+        "secondaryEventCode": {
+          "type": "string"
+        },
+        "insuranceNumber": {
+          "type": "string"
+        },
+        "incidentSequenceNumber": {
+          "type": "string"
+        },
+        "incidentDate": {
+          "type": "string"
+        },
+        "partRef": {
+          "type": "string"
+        },
+        "contactInformation": {
+          "$ref": "#/definitions/ContactInformation"
+        },
+        "processGuideQuestionAnswers": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Questions"
+          }
+        },
+        "category": {
+          "$ref": "#/definitions/Category"
+        },
+        "claimType": {
+          "type": "string"
+        },
+        "processGuideScore": {
+          "type": "string"
+        },
+        "referenceForDiagnostics": {
+          "type": "string",
+          "readOnly": true
+        },
+        "returnForm": {
+          "type": "string"
+        },
+        "letterTemplateId": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "applicationIdForEmailAndEarchive": {
+          "type": "string"
+        }
+      }
+    },
+    "ContactInformation": {
+      "type": "object",
+      "properties": {
+        "cpr": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "zipCode": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "TreatmentInsuranceRequest": {
+      "type": "object",
+      "properties": {
+        "insuranceNumber": {
+          "type": "string"
+        },
+        "incidentSequenceNumber": {
+          "type": "string"
+        },
+        "claimReporterPartRef": {
+          "type": "string"
+        },
+        "incidentDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "physicianReferral": {
+          "type": "boolean"
+        },
+        "processCode": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "subDomain": {
+          "type": "string"
+        },
+        "eventCode": {
+          "type": "string"
+        },
+        "damageCode": {
+          "type": "string"
+        },
+        "questions": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Questions"
+          }
+        }
+      }
+    },
+    "TreatmentInsurancePayload": {
+      "type": "object",
+      "properties": {
+        "insuranceNumber": {
+          "type": "string"
+        },
+        "incidentSequenceNumber": {
+          "type": "string"
+        },
+        "applicationId": {
+          "type": "string"
+        },
+        "processCode": {
+          "type": "string"
+        },
+        "incidentDate": {
+          "type": "string"
+        },
+        "questions": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Questions"
+          }
+        },
+        "category": {
+          "$ref": "#/definitions/Category"
+        },
+        "regarding": {
+          "$ref": "#/definitions/Regarding"
+        },
+        "customData": {
+          "type": "object"
+        },
+        "physicianReferral": {
+          "type": "boolean"
+        },
+        "processGuideScore": {
+          "type": "string"
+        },
+        "hasCaseBeenRegisteredAtTreatmentCompany": {
+          "type": "boolean"
+        },
+        "isMultipleRisks": {
+          "type": "boolean"
+        },
+        "treatmentCompanyData": {
+          "$ref": "#/definitions/TreatmentCompanyData"
+        },
+        "referenceForDiagnostics": {
+          "type": "string",
+          "readOnly": true
+        },
+        "incidientSequenceNumber": {
+          "type": "string"
+        }
+      }
+    },
+    "TreatmentCompanyData": {
+      "type": "object",
+      "properties": {
+        "socialSecurityNumber": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "mobilePhoneNumber": {
+          "type": "string"
+        },
+        "phoneNumber": {
+          "type": "string"
+        },
+        "address1": {
+          "type": "string"
+        },
+        "address2": {
+          "type": "string"
+        },
+        "zipCode": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "coverVariable": {
+          "$ref": "#/definitions/CoverVariable"
+        },
+        "hasExistingCase": {
+          "type": "boolean"
+        },
+        "questionsAnswers": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TreatmentInsuranceQuestionsAnswers"
+          }
+        },
+        "isSecretAddress": {
+          "type": "boolean"
+        }
+      }
+    },
+    "CoverVariable": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "coverVariableType": {
+          "enum": [
+            "Udb",
+            "CoverVariable"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "TreatmentInsuranceQuestionsAnswers": {
+      "type": "object",
+      "properties": {
+        "questionCode": {
+          "type": "string"
+        },
+        "questionText": {
+          "type": "string"
+        },
+        "answer": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

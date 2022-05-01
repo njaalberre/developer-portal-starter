@@ -1,4 +1,8 @@
-# Install the developer portal
+# Install the developer portal and contribute
+
+## Redoc documentation
+
+[Introduction](https://redocly.com/docs/developer-portal/introduction/)
 
 ## Clone
 

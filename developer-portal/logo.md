@@ -9,7 +9,7 @@ If you want to overwrite the existing logo, it's at `images/logo.png`.
 
 The `siteConfig.yaml` has a definition of the path to the header icon.
 ```yaml
-logo: ./images/logo.png
+logo: ./images/gjensidige-logo.png
 ```
 
 ## Adjust favicon.png

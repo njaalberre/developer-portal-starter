@@ -1,0 +1,4247 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://P-114-270-249.mistral.mistralnett.com:4248/api-forsikringer",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/v2/tilbud/{forsikringsnr}": {
+      "post": {
+        "tags": [
+          "tilbud-resource"
+        ],
+        "operationId": "oppdaterTilbud",
+        "parameters": [
+          {
+            "name": "forsikringsnr",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Tilbud"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v2/ondemand/send-dokumenter": {
+      "post": {
+        "tags": [
+          "on-demand-resource"
+        ],
+        "operationId": "sendDocuments",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailDocumentsBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/v2/actions/send-begunstigelse": {
+      "post": {
+        "tags": [
+          "forsikringer-actions-resource"
+        ],
+        "operationId": "sendBegunstigelse",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BegunstigelseForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v2/actions/opprett-kontonr": {
+      "post": {
+        "tags": [
+          "forsikringer-actions-resource"
+        ],
+        "operationId": "opprettForsikringKontonr",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/KontoBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v2/actions/last-ned-gront-kort": {
+      "post": {
+        "tags": [
+          "forsikringer-actions-resource"
+        ],
+        "operationId": "lastNedGrontKort",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GrontKortRequestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "byte"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/actions/endre-kontonr": {
+      "post": {
+        "tags": [
+          "forsikringer-actions-resource"
+        ],
+        "operationId": "endreForsikringKontonr",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/KontoBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v2/actions/bestill-gront-kort": {
+      "post": {
+        "tags": [
+          "forsikringer-actions-resource"
+        ],
+        "operationId": "bestillGrontKort",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GrontKortRequestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v2": {
+      "get": {
+        "tags": [
+          "forsikringer-resource"
+        ],
+        "operationId": "getForsikringer",
+        "parameters": [
+          {
+            "name": "partref",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "withBetalinger",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "betalingstyper",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "INNBETALT",
+                  "UTBETALT"
+                ]
+              }
+            }
+          },
+          {
+            "name": "atgBehandlingsstatuser",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "F",
+                  "S"
+                ]
+              }
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "PRODUKSJON",
+                  "KLADD",
+                  "TILBUD",
+                  "INAKTIV"
+                ]
+              },
+              "default": [
+                "PRODUKSJON"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ForsikringWithStatus"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/{forsikringsnr}": {
+      "get": {
+        "tags": [
+          "forsikringer-resource"
+        ],
+        "operationId": "getForsikring",
+        "parameters": [
+          {
+            "name": "forsikringsnr",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "withBetalinger",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "betalingstyper",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "INNBETALT",
+                  "UTBETALT"
+                ]
+              }
+            }
+          },
+          {
+            "name": "atgBehandlingsstatuser",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "F",
+                  "S"
+                ]
+              }
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "PRODUKSJON",
+                  "KLADD",
+                  "TILBUD",
+                  "INAKTIV"
+                ]
+              },
+              "default": [
+                "PRODUKSJON"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForsikringWithStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/{forsikringsnr}/risikoer/{risikonr}/dokumenter/{dokument}": {
+      "get": {
+        "tags": [
+          "dokumenter-resource"
+        ],
+        "operationId": "getForsikringsdokument",
+        "parameters": [
+          {
+            "name": "forsikringsnr",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "risikonr",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dokument",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "BEKREFTELSE",
+                "VILKAAR",
+                "VILKAAR_I_KLADD"
+              ]
+            }
+          },
+          {
+            "name": "partref",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "byte"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/tilbud": {
+      "get": {
+        "tags": [
+          "tilbud-resource"
+        ],
+        "operationId": "hentTilbud",
+        "parameters": [
+          {
+            "name": "partref",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "opprettetEtterDato",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/Risiko"
+                      },
+                      {
+                        "$ref": "#/components/schemas/RisikoAnsvar"
+                      },
+                      {
+                        "$ref": "#/components/schemas/RisikoBaat"
+                      },
+                      {
+                        "$ref": "#/components/schemas/RisikoBolig"
+                      },
+                      {
+                        "$ref": "#/components/schemas/RisikoDriftstap"
+                      },
+                      {
+                        "$ref": "#/components/schemas/RisikoDyr"
+                      },
+                      {
+                        "$ref": "#/components/schemas/RisikoEiendeler"
+                      },
+                      {
+                        "$ref": "#/components/schemas/RisikoKjoretoy"
+                      },
+                      {
+                        "$ref": "#/components/schemas/RisikoKjoretoyGruppe"
+                      },
+                      {
+                        "$ref": "#/components/schemas/RisikoMaskin"
+                      },
+                      {
+                        "$ref": "#/components/schemas/RisikoPerson"
+                      },
+                      {
+                        "$ref": "#/components/schemas/RisikoPersonNaringsliv"
+                      },
+                      {
+                        "$ref": "#/components/schemas/RisikoProduksjon"
+                      },
+                      {
+                        "$ref": "#/components/schemas/RisikoReise"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/risikoprodukt": {
+      "get": {
+        "tags": [
+          "risikoprodukt-resource"
+        ],
+        "operationId": "getRisikoprodukter",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/Risikoprodukt"
+                      },
+                      {
+                        "$ref": "#/components/schemas/RisikoproduktBil"
+                      },
+                      {
+                        "$ref": "#/components/schemas/RisikoproduktBolig"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/risikoprodukt/{risikoproduktnr}": {
+      "get": {
+        "tags": [
+          "risikoprodukt-resource"
+        ],
+        "operationId": "getRisikoprodukt",
+        "parameters": [
+          {
+            "name": "risikoproduktnr",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Risikoprodukt"
+                    },
+                    {
+                      "$ref": "#/components/schemas/RisikoproduktBil"
+                    },
+                    {
+                      "$ref": "#/components/schemas/RisikoproduktBolig"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/risikoer": {
+      "get": {
+        "tags": [
+          "risikoer-resource"
+        ],
+        "operationId": "getRisikoer",
+        "parameters": [
+          {
+            "name": "partref",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "rollekoder",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "FT,FF,RE,ML,F,TT,TS,KJ,SE"
+            }
+          },
+          {
+            "name": "lopende",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "true"
+            }
+          },
+          {
+            "name": "fornyelse",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "false"
+            }
+          },
+          {
+            "name": "fremtidige",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "false"
+            }
+          },
+          {
+            "name": "kladder",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "false"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EnkelRisiko"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/risikoer/{risikonr}": {
+      "get": {
+        "tags": [
+          "risikoer-resource"
+        ],
+        "operationId": "getRisiko",
+        "parameters": [
+          {
+            "name": "risikonr",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Risiko"
+                    },
+                    {
+                      "$ref": "#/components/schemas/RisikoAnsvar"
+                    },
+                    {
+                      "$ref": "#/components/schemas/RisikoBaat"
+                    },
+                    {
+                      "$ref": "#/components/schemas/RisikoBolig"
+                    },
+                    {
+                      "$ref": "#/components/schemas/RisikoDriftstap"
+                    },
+                    {
+                      "$ref": "#/components/schemas/RisikoDyr"
+                    },
+                    {
+                      "$ref": "#/components/schemas/RisikoEiendeler"
+                    },
+                    {
+                      "$ref": "#/components/schemas/RisikoKjoretoy"
+                    },
+                    {
+                      "$ref": "#/components/schemas/RisikoKjoretoyGruppe"
+                    },
+                    {
+                      "$ref": "#/components/schemas/RisikoMaskin"
+                    },
+                    {
+                      "$ref": "#/components/schemas/RisikoPerson"
+                    },
+                    {
+                      "$ref": "#/components/schemas/RisikoPersonNaringsliv"
+                    },
+                    {
+                      "$ref": "#/components/schemas/RisikoProduksjon"
+                    },
+                    {
+                      "$ref": "#/components/schemas/RisikoReise"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/risikoer/{risikonr}/begunstigelse": {
+      "get": {
+        "tags": [
+          "risikoer-resource"
+        ],
+        "operationId": "getRisikoBegunstigelse",
+        "parameters": [
+          {
+            "name": "risikonr",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BegunstigelseRisikoResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/risikoer/detaljert": {
+      "get": {
+        "tags": [
+          "risikoer-resource"
+        ],
+        "operationId": "getDetaljerteRisikoer",
+        "parameters": [
+          {
+            "name": "partref",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "PRODUKSJON",
+                  "KLADD",
+                  "TILBUD",
+                  "INAKTIV"
+                ]
+              },
+              "default": [
+                "PRODUKSJON"
+              ]
+            }
+          },
+          {
+            "name": "risikoprodukter",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DetaljerteRisikoer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/reisekort/{fnr}/{rnr}": {
+      "get": {
+        "tags": [
+          "reisekort-resource"
+        ],
+        "operationId": "getReisekortDetails",
+        "parameters": [
+          {
+            "name": "fnr",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "rnr",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Reisekort"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/reisekort/last-ned/{fnr}/{rnr}": {
+      "get": {
+        "tags": [
+          "reisekort-resource"
+        ],
+        "operationId": "getReisekort",
+        "parameters": [
+          {
+            "name": "fnr",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "rnr",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "byte"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/part-og-annullert-status/{risikonr}": {
+      "get": {
+        "tags": [
+          "forsikringer-resource"
+        ],
+        "operationId": "getForsikringOwner",
+        "parameters": [
+          {
+            "name": "risikonr",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartrefOgAnnullertstatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/oppdater-ansatt-relasjon-reiseforsikring": {
+      "get": {
+        "tags": [
+          "forsikringer-resource"
+        ],
+        "operationId": "oppdaterAnsattrelasjonReiseforsikring",
+        "parameters": [
+          {
+            "name": "forsikringsnr",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v2/ondemand": {
+      "get": {
+        "tags": [
+          "on-demand-resource"
+        ],
+        "operationId": "getOnDemandDocuments",
+        "parameters": [
+          {
+            "name": "partref",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fromDate",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GroupedOnDemandObjects"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/ondemand/{id}": {
+      "get": {
+        "tags": [
+          "on-demand-resource"
+        ],
+        "operationId": "getDocument",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "byte"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/ondemand/{folder}/{type}/{id}": {
+      "get": {
+        "tags": [
+          "on-demand-resource"
+        ],
+        "operationId": "getDocument_1",
+        "parameters": [
+          {
+            "name": "folder",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "byte"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/ondemand/utsendelse/{id}": {
+      "get": {
+        "tags": [
+          "on-demand-resource"
+        ],
+        "operationId": "getUtsendelseDocumentsZipped",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "partref",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/zip": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "byte"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/merker": {
+      "get": {
+        "tags": [
+          "merker-resource"
+        ],
+        "operationId": "getRisikotyper",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/KodeVerdi"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/merker/{risikotype}": {
+      "get": {
+        "tags": [
+          "merker-resource"
+        ],
+        "operationId": "getMerketyper",
+        "parameters": [
+          {
+            "name": "risikotype",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/KodeVerdi"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/merker/{risikotype}/{merketype}": {
+      "get": {
+        "tags": [
+          "merker-resource"
+        ],
+        "operationId": "getMerker",
+        "parameters": [
+          {
+            "name": "risikotype",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "merketype",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/KodeVerdi"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/merker/{risikotype}/{merketype}/{merke}": {
+      "get": {
+        "tags": [
+          "merker-resource"
+        ],
+        "operationId": "getModeller",
+        "parameters": [
+          {
+            "name": "risikotype",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "merketype",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "merke",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Modell"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/leverandor/forsikringsselskaper": {
+      "get": {
+        "tags": [
+          "leverandor-resource"
+        ],
+        "operationId": "getForsikringsselskaper",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Leverandor"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/hent-ansatt-relasjon-reiseforsikring/": {
+      "get": {
+        "tags": [
+          "forsikringer-resource"
+        ],
+        "operationId": "hentAnsattrelasjonReiseforsikring",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ReiseforsikringStatus"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/earkiv": {
+      "get": {
+        "tags": [
+          "e-arkiv-resource"
+        ],
+        "operationId": "getEArkivDocuments",
+        "parameters": [
+          {
+            "name": "partref",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "archive",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "TING",
+                  "PERSON",
+                  "HELSE_DEKLARASJON",
+                  "GENERELL",
+                  "HELSE",
+                  "GFDK_TING",
+                  "GFDK_PERSON",
+                  "GFDK_GENERELL",
+                  "GFDK_SYSTEM_PRINT",
+                  "NFDK_TING",
+                  "NFDK_PERSON",
+                  "PENSJON",
+                  "FOND"
+                ]
+              }
+            }
+          },
+          {
+            "name": "fromDate",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EArkivDocument"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/earkiv/{id}": {
+      "get": {
+        "tags": [
+          "e-arkiv-resource"
+        ],
+        "operationId": "getDocument_2",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "byte"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1": {
+      "get": {
+        "tags": [
+          "engasjement-resource"
+        ],
+        "operationId": "getRisikoOversikt",
+        "parameters": [
+          {
+            "name": "partref",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "rollekoder",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "EI",
+                  "F",
+                  "FF",
+                  "FT",
+                  "KJ",
+                  "LV",
+                  "LE",
+                  "ML",
+                  "PH",
+                  "RE",
+                  "SE",
+                  "TS",
+                  "TT"
+                ]
+              },
+              "default": [
+                "FT",
+                "FF",
+                "RE",
+                "ML",
+                "F",
+                "TT",
+                "TS",
+                "KJ",
+                "SE"
+              ]
+            }
+          },
+          {
+            "name": "lopende",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          },
+          {
+            "name": "fornyelse",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "fremtidige",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "kladder",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "dato",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "sortable",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SortableRisikogruppe"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/{forsikringsnr}/risikoer/{risikonr}": {
+      "get": {
+        "tags": [
+          "engasjement-resource"
+        ],
+        "operationId": "getRisiko_1",
+        "parameters": [
+          {
+            "name": "forsikringsnr",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "risikonr",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fornyelse",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "kladd",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Risiko"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/forsikringsoversikt": {
+      "get": {
+        "tags": [
+          "engasjement-resource"
+        ],
+        "operationId": "getForsikringsOversikt",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForsikringsOversikt"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Tilbud": {
+        "required": [
+          "aksjon",
+          "kommentar",
+          "kundePartref"
+        ],
+        "type": "object",
+        "properties": {
+          "kundePartref": {
+            "type": "string"
+          },
+          "aksjon": {
+            "type": "string",
+            "enum": [
+              "AKSEPT",
+              "ENDRE",
+              "SLETT"
+            ]
+          },
+          "kommentar": {
+            "type": "string"
+          }
+        }
+      },
+      "Dispatchment": {
+        "required": [
+          "date",
+          "documents",
+          "forsikringsNummer"
+        ],
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "forsikringsNummer": {
+            "type": "string"
+          },
+          "documents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Document"
+            }
+          }
+        }
+      },
+      "Document": {
+        "required": [
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "EmailDocumentsBody": {
+        "required": [
+          "dispatchments",
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "dispatchments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Dispatchment"
+            }
+          }
+        }
+      },
+      "BegunstigelseForm": {
+        "required": [
+          "begunstigede",
+          "dekninger",
+          "etternavn",
+          "fodselsnr",
+          "fornavn",
+          "forsikringsnr",
+          "risikonr"
+        ],
+        "type": "object",
+        "properties": {
+          "forsikringsnr": {
+            "type": "string"
+          },
+          "risikonr": {
+            "type": "string"
+          },
+          "dekninger": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "begunstigede": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Begunstiget"
+            }
+          },
+          "fornavn": {
+            "type": "string"
+          },
+          "etternavn": {
+            "type": "string"
+          },
+          "fodselsnr": {
+            "type": "string"
+          }
+        }
+      },
+      "Begunstiget": {
+        "required": [
+          "andel",
+          "id",
+          "navn"
+        ],
+        "type": "object",
+        "properties": {
+          "navn": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "andel": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "KontoBody": {
+        "required": [
+          "forsikringsnr",
+          "kontonr",
+          "risikonr"
+        ],
+        "type": "object",
+        "properties": {
+          "kontonr": {
+            "pattern": "^(\\d){11}$",
+            "type": "string"
+          },
+          "forsikringsnr": {
+            "type": "string"
+          },
+          "risikonr": {
+            "type": "string"
+          }
+        }
+      },
+      "GrontKortRequestBody": {
+        "required": [
+          "adresse",
+          "forsikringsnummer",
+          "navn",
+          "postnummer",
+          "poststed",
+          "regnummerNaeringsbilgruppe",
+          "regnummerTilhenger",
+          "reisedato",
+          "risikobeskrivelse",
+          "risikonummer"
+        ],
+        "type": "object",
+        "properties": {
+          "navn": {
+            "type": "string"
+          },
+          "adresse": {
+            "type": "string"
+          },
+          "postnummer": {
+            "type": "string"
+          },
+          "poststed": {
+            "type": "string"
+          },
+          "reisedato": {
+            "type": "string",
+            "format": "date"
+          },
+          "forsikringsnummer": {
+            "type": "string"
+          },
+          "risikonummer": {
+            "type": "string"
+          },
+          "risikobeskrivelse": {
+            "type": "string"
+          },
+          "regnummerTilhenger": {
+            "type": "string"
+          },
+          "regnummerNaeringsbilgruppe": {
+            "type": "string"
+          }
+        }
+      },
+      "AvtaleGiro": {
+        "required": [
+          "behandlingsStatus",
+          "belop",
+          "betaltdato",
+          "lopenummer",
+          "periode",
+          "trekkdato"
+        ],
+        "type": "object",
+        "properties": {
+          "periode": {
+            "type": "string"
+          },
+          "belop": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "trekkdato": {
+            "type": "string",
+            "format": "date"
+          },
+          "betaltdato": {
+            "type": "string",
+            "format": "date"
+          },
+          "behandlingsStatus": {
+            "type": "string"
+          },
+          "lopenummer": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "Betaling": {
+        "required": [
+          "behandlet",
+          "belop",
+          "betaltDato",
+          "betaltLopeNummer",
+          "buntnummer",
+          "periode",
+          "registrertDato",
+          "saldonr",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "periode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "saldonr": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "type": {
+            "type": "string"
+          },
+          "belop": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "registrertDato": {
+            "type": "string",
+            "format": "date"
+          },
+          "betaltDato": {
+            "type": "string",
+            "format": "date"
+          },
+          "behandlet": {
+            "type": "boolean"
+          },
+          "buntnummer": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "betaltLopeNummer": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "ForsikringWithStatus": {
+        "required": [
+          "aktivTjenesteHelsehjelp",
+          "forsikringsnummer",
+          "status",
+          "varslingsbetingelser"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "PRODUKSJON",
+              "KLADD",
+              "TILBUD",
+              "INAKTIV"
+            ]
+          },
+          "adressekodeForsikringsbevis": {
+            "type": "string"
+          },
+          "adressekodeGiro": {
+            "type": "string"
+          },
+          "aktivTjenesteHelsehjelp": {
+            "type": "boolean"
+          },
+          "avtalegiroer": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AvtaleGiro"
+            }
+          },
+          "betalinger": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Betaling"
+            }
+          },
+          "forsikringsnummer": {
+            "type": "string"
+          },
+          "giro": {
+            "$ref": "#/components/schemas/Giro"
+          },
+          "hovedforfall": {
+            "type": "string",
+            "format": "date"
+          },
+          "kontonr": {
+            "type": "string"
+          },
+          "risikoer": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Risiko"
+            }
+          },
+          "varslingsbetingelser": {
+            "$ref": "#/components/schemas/Varslingsbetingelser"
+          }
+        }
+      },
+      "Giro": {
+        "required": [
+          "periode",
+          "saldonr",
+          "skyldig",
+          "terminbelop1",
+          "terminbelop2",
+          "terminbelop3",
+          "terminbelop4"
+        ],
+        "type": "object",
+        "properties": {
+          "terminbelop1": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "terminbelop2": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "terminbelop3": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "terminbelop4": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "skyldig": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "periode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "saldonr": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "betalingsfristkode": {
+            "type": "string"
+          },
+          "terminFraDato": {
+            "type": "string",
+            "format": "date"
+          },
+          "terminTilDato": {
+            "type": "string",
+            "format": "date"
+          },
+          "betalingsfrist": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "Risiko": {
+        "required": [
+          "grunnrisikonummer",
+          "produktgruppe",
+          "risikobeskrivelse",
+          "risikonummer",
+          "risikoproduktnummer"
+        ],
+        "type": "object",
+        "properties": {
+          "risikonummer": {
+            "type": "string"
+          },
+          "produktgruppe": {
+            "type": "string"
+          },
+          "risikobeskrivelse": {
+            "type": "string"
+          },
+          "opprinneligIKraft": {
+            "type": "string",
+            "format": "date"
+          },
+          "grunnrisikonummer": {
+            "type": "string"
+          },
+          "risikoproduktnummer": {
+            "type": "string"
+          },
+          "annullasjonskode": {
+            "type": "string"
+          },
+          "annullasjonsdato": {
+            "type": "string"
+          }
+        }
+      },
+      "Varslingsbetingelser": {
+        "required": [
+          "antallTerminer",
+          "isAvtaleGiro",
+          "isEfaktura",
+          "kontonummer"
+        ],
+        "type": "object",
+        "properties": {
+          "isAvtaleGiro": {
+            "type": "boolean"
+          },
+          "antallTerminer": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "kontonummer": {
+            "type": "string"
+          },
+          "kid": {
+            "type": "string"
+          },
+          "kundeKid": {
+            "type": "string"
+          },
+          "isEfaktura": {
+            "type": "boolean"
+          },
+          "statusAvtaleGiro": {
+            "type": "string"
+          },
+          "trekkdag": {
+            "type": "string"
+          }
+        }
+      },
+      "Adresse": {
+        "type": "object",
+        "properties": {
+          "gaardsnr": {
+            "type": "string"
+          },
+          "bruksnr": {
+            "type": "string"
+          },
+          "gatenavn": {
+            "type": "string"
+          },
+          "husnr": {
+            "type": "string"
+          },
+          "postnr": {
+            "type": "string"
+          },
+          "poststed": {
+            "type": "string"
+          }
+        }
+      },
+      "Ansvar": {
+        "type": "object",
+        "properties": {
+          "regnskapsaar": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "driftsinntekter": {
+            "$ref": "#/components/schemas/RisikoElementLong"
+          },
+          "prosentandel": {
+            "$ref": "#/components/schemas/RisikoElementInteger"
+          },
+          "virksomhet": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          }
+        }
+      },
+      "Baat": {
+        "type": "object",
+        "properties": {
+          "typeBaat": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "kjennemerke": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "knopBruk": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "merkekodeBaat": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "fabrikatBaat": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "modellBaat": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "antallFot": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "aarsmodellBaat": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "typeMotor": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "merkekodeMotor": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "fabrikatMotor": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "antallHk": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "aarsmodellMotor": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          }
+        }
+      },
+      "BegunstigelseRekkefolge": {
+        "type": "object",
+        "properties": {
+          "rekkefolgeKode": {
+            "type": "string"
+          },
+          "dekningsbeskrivelse": {
+            "type": "string"
+          },
+          "rekkefolgeBeskrivelse": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ytterligereBeskrivelse": {
+            "type": "string"
+          }
+        }
+      },
+      "Bolig": {
+        "type": "object",
+        "properties": {
+          "gateadresse": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "gatenavn": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "husnr": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "postadresse": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "lengdegrad": {
+            "$ref": "#/components/schemas/RisikoElementDouble"
+          },
+          "breddegrad": {
+            "$ref": "#/components/schemas/RisikoElementDouble"
+          },
+          "bohenhet": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "bokstav": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "bruk": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "bruksnr": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "byggeaar": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "byggemaate": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "bygningstype": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "forsikringsform": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "gaardsnr": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "fullverdi": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "krypkjeller": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "postnr": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "taktype": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "romUnderBakkeplan": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "adresseid": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "bygningsid": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "eiendomsid": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          }
+        }
+      },
+      "Bygning": {
+        "type": "object",
+        "properties": {
+          "bygningsnummer": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bygningstype": {
+            "type": "string"
+          },
+          "ekstrabeskrivelse": {
+            "type": "string"
+          },
+          "anvendelse": {
+            "$ref": "#/components/schemas/KodeVerdi"
+          },
+          "byggeaar": {
+            "type": "string"
+          },
+          "bruttoareal": {
+            "type": "string"
+          },
+          "forsikringsform": {
+            "$ref": "#/components/schemas/KodeVerdi"
+          },
+          "fullverdigrunnlag": {
+            "type": "string"
+          },
+          "premie": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "Bygningsspesifikasjon": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "kode": {
+            "type": "string"
+          },
+          "areal": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bygningsstandard": {
+            "$ref": "#/components/schemas/KodeVerdi"
+          },
+          "bygningsopplysning": {
+            "type": "string"
+          }
+        }
+      },
+      "Dekning": {
+        "type": "object",
+        "properties": {
+          "nr": {
+            "type": "string"
+          },
+          "produkt": {
+            "$ref": "#/components/schemas/KodeVerdi"
+          },
+          "grunndekningsnummer": {
+            "type": "string"
+          },
+          "forsikringssum": {
+            "$ref": "#/components/schemas/KodeVerdi"
+          },
+          "egenandel": {
+            "$ref": "#/components/schemas/KodeVerdi"
+          },
+          "udb": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Udb"
+            }
+          },
+          "dekningenOmfatter": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DekningOmfang"
+            }
+          },
+          "premiebelop": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nyDekning": {
+            "type": "boolean"
+          },
+          "annullasjonsdato": {
+            "type": "string",
+            "format": "date"
+          },
+          "annullasjonskode": {
+            "type": "string"
+          },
+          "helseReservasjon": {
+            "type": "boolean"
+          },
+          "helseReservasjonDato": {
+            "type": "string",
+            "format": "date"
+          },
+          "helseTilleggspremie": {
+            "type": "boolean"
+          },
+          "helseVurderingStatus": {
+            "type": "string"
+          },
+          "dekningsvariabel": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Dekningsvariabel"
+            }
+          },
+          "navngittBegunstigelse": {
+            "type": "boolean"
+          },
+          "begunstigelseRekkefolge": {
+            "$ref": "#/components/schemas/BegunstigelseRekkefolge"
+          }
+        }
+      },
+      "DekningOmfang": {
+        "type": "object",
+        "properties": {
+          "produktnr": {
+            "type": "string"
+          },
+          "beskrivelse": {
+            "type": "string"
+          },
+          "forsikringssum": {
+            "type": "string"
+          },
+          "egenandel": {
+            "type": "string"
+          }
+        }
+      },
+      "Dekningsvariabel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "verdi": {
+            "type": "string"
+          },
+          "beskrivelse": {
+            "type": "string"
+          }
+        }
+      },
+      "Detaljer": {
+        "type": "object",
+        "properties": {
+          "rolle": {
+            "type": "string"
+          }
+        }
+      },
+      "Driftstap": {
+        "type": "object",
+        "properties": {
+          "driftsinntekter": {
+            "$ref": "#/components/schemas/RisikoElementLong"
+          }
+        }
+      },
+      "Dyr": {
+        "type": "object",
+        "properties": {
+          "rasekode": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "dyreslag": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "rasenavn": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "navn": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "fodt": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "kjonn": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "bruksomraade": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "medlemsorganisasjon": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "helseerklaering": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          }
+        }
+      },
+      "EnkelPart": {
+        "required": [
+          "identifikasjon"
+        ],
+        "type": "object",
+        "properties": {
+          "identifikasjon": {
+            "$ref": "#/components/schemas/Identifikasjon"
+          },
+          "detaljer": {
+            "$ref": "#/components/schemas/Detaljer"
+          }
+        }
+      },
+      "Forsikring": {
+        "type": "object",
+        "properties": {
+          "nr": {
+            "type": "string"
+          },
+          "produkt": {
+            "$ref": "#/components/schemas/KodeVerdi"
+          },
+          "avtaleprodukt": {
+            "$ref": "#/components/schemas/KodeVerdi"
+          },
+          "ikraftdato": {
+            "type": "string",
+            "format": "date"
+          },
+          "hovedforfall": {
+            "type": "string",
+            "format": "date"
+          },
+          "varslingsbetingelser": {
+            "$ref": "#/components/schemas/Varslingsbetingelser"
+          },
+          "sendevei": {
+            "type": "string"
+          },
+          "aktivTjenesteHelsehjelp": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Forsikringssted": {
+        "type": "object",
+        "properties": {
+          "forsikringsstedNr": {
+            "type": "string"
+          },
+          "adresse": {
+            "$ref": "#/components/schemas/Adresse"
+          },
+          "bygninger": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Bygning"
+            }
+          },
+          "beskrivelse": {
+            "type": "string"
+          },
+          "ekstrabeskrivelse": {
+            "type": "string"
+          }
+        }
+      },
+      "Identifikasjon": {
+        "required": [
+          "partref"
+        ],
+        "type": "object",
+        "properties": {
+          "partref": {
+            "type": "string"
+          },
+          "navn": {
+            "type": "string"
+          },
+          "idNummer": {
+            "type": "string"
+          }
+        }
+      },
+      "Kjoretoy": {
+        "type": "object",
+        "properties": {
+          "kjennemerke": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "fabrikat": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "type": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "modell": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "aarsmodell": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "kjorelengde": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "kilometerstand": {
+            "$ref": "#/components/schemas/RisikoElementInteger"
+          },
+          "bruk": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "bonus": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "avlestDato": {
+            "$ref": "#/components/schemas/RisikoElementLocalDate"
+          },
+          "deklarasjonsavtale": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "grensedato": {
+            "$ref": "#/components/schemas/RisikoElementLocalDate"
+          },
+          "grensedato2": {
+            "$ref": "#/components/schemas/RisikoElementLocalDate"
+          },
+          "kilometergrense": {
+            "$ref": "#/components/schemas/RisikoElementInteger"
+          },
+          "kilometergrense2": {
+            "$ref": "#/components/schemas/RisikoElementInteger"
+          },
+          "motorytelse": {
+            "$ref": "#/components/schemas/RisikoElementInteger"
+          }
+        }
+      },
+      "KjoretoyGruppe": {
+        "type": "object",
+        "properties": {
+          "antallKjoretoy": {
+            "$ref": "#/components/schemas/RisikoElementInteger"
+          },
+          "gruppebeskrivelse": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "gruppebeskrivelse2": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "virksomhet": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "risikotype": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          }
+        }
+      },
+      "KodeVerdi": {
+        "type": "object",
+        "properties": {
+          "kode": {
+            "type": "string"
+          },
+          "verdi": {
+            "type": "string"
+          }
+        }
+      },
+      "Maskin": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "kjennemerke": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "merkekode": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "fabrikat": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "modell": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "aarsmodell": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "aarligKjoretid": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "avlestMnd": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "timeteller": {
+            "$ref": "#/components/schemas/RisikoElementInteger"
+          },
+          "bruk": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "bruksomraade": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          }
+        }
+      },
+      "Person": {
+        "type": "object",
+        "properties": {
+          "fodselsnr": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "partref": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "navn": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "yrke": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "utdanning": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "ansettelse": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "royking": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "aarsinntekt": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          }
+        }
+      },
+      "PersonNaringsliv": {
+        "type": "object",
+        "properties": {
+          "virksomhet": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "gruppe": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "avtale": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "ordning": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "naringspostnr": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "naringskommune": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "aldersfordeling": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "yrkesfordeling": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "medlemsliste": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          }
+        }
+      },
+      "Produksjon": {
+        "type": "object",
+        "properties": {
+          "produksjonsnr": {
+            "type": "string"
+          },
+          "forsikringsstedsnr": {
+            "type": "string"
+          },
+          "bygningsnr": {
+            "type": "string"
+          },
+          "risikotypebeskrivelse": {
+            "type": "string"
+          },
+          "fabrikat": {
+            "type": "string"
+          },
+          "antallEnheter": {
+            "type": "string"
+          },
+          "forsikringssum": {
+            "type": "string"
+          }
+        }
+      },
+      "Reise": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "omfang": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "reisegodssumEnPerson": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "reisegodssumFamilie": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "varighetUkerFamile": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "varighetUkerPerson": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "antallPersoner": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          },
+          "omrade": {
+            "$ref": "#/components/schemas/RisikoElementString"
+          }
+        }
+      },
+      "RisikoAnsvar": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Risiko"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "ansvar": {
+                "$ref": "#/components/schemas/Ansvar"
+              }
+            }
+          }
+        ]
+      },
+      "RisikoBaat": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Risiko"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "baat": {
+                "$ref": "#/components/schemas/Baat"
+              }
+            }
+          }
+        ]
+      },
+      "RisikoBolig": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Risiko"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "bolig": {
+                "$ref": "#/components/schemas/Bolig"
+              },
+              "bygningsspesifikasjon": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Bygningsspesifikasjon"
+                }
+              },
+              "salgsinformasjon": {
+                "$ref": "#/components/schemas/Salgsinformasjon"
+              }
+            }
+          }
+        ]
+      },
+      "RisikoDriftstap": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Risiko"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "driftstap": {
+                "$ref": "#/components/schemas/Driftstap"
+              }
+            }
+          }
+        ]
+      },
+      "RisikoDyr": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Risiko"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "dyr": {
+                "$ref": "#/components/schemas/Dyr"
+              }
+            }
+          }
+        ]
+      },
+      "RisikoEiendeler": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Risiko"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "forsikringssteder": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Forsikringssted"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "RisikoElementDouble": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "verdi": {
+            "type": "number",
+            "format": "double"
+          },
+          "verditekst": {
+            "type": "string"
+          },
+          "detaljertVerdi": {
+            "type": "string"
+          }
+        }
+      },
+      "RisikoElementInteger": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "verdi": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "verditekst": {
+            "type": "string"
+          },
+          "detaljertVerdi": {
+            "type": "string"
+          }
+        }
+      },
+      "RisikoElementLocalDate": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "verdi": {
+            "type": "string",
+            "format": "date"
+          },
+          "verditekst": {
+            "type": "string"
+          },
+          "detaljertVerdi": {
+            "type": "string"
+          }
+        }
+      },
+      "RisikoElementLong": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "verdi": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "verditekst": {
+            "type": "string"
+          },
+          "detaljertVerdi": {
+            "type": "string"
+          }
+        }
+      },
+      "RisikoElementString": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "verdi": {
+            "type": "string"
+          },
+          "verditekst": {
+            "type": "string"
+          },
+          "detaljertVerdi": {
+            "type": "string"
+          }
+        }
+      },
+      "RisikoKjoretoy": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Risiko"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "kjoretoy": {
+                "$ref": "#/components/schemas/Kjoretoy"
+              },
+              "tfa": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "leasing": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "RisikoKjoretoyGruppe": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Risiko"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "kjoretoyGruppe": {
+                "$ref": "#/components/schemas/KjoretoyGruppe"
+              },
+              "tfa": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          }
+        ]
+      },
+      "RisikoMaskin": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Risiko"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "maskin": {
+                "$ref": "#/components/schemas/Maskin"
+              }
+            }
+          }
+        ]
+      },
+      "RisikoPerson": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Risiko"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "person": {
+                "$ref": "#/components/schemas/Person"
+              }
+            }
+          }
+        ]
+      },
+      "RisikoPersonNaringsliv": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Risiko"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "personNaringsliv": {
+                "$ref": "#/components/schemas/PersonNaringsliv"
+              }
+            }
+          }
+        ]
+      },
+      "RisikoProduksjon": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Risiko"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "forsikringssteder": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Forsikringssted"
+                }
+              },
+              "produksjoner": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Produksjon"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "RisikoReise": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Risiko"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "reise": {
+                "$ref": "#/components/schemas/Reise"
+              }
+            }
+          }
+        ]
+      },
+      "Salgsinformasjon": {
+        "type": "object",
+        "properties": {
+          "oppdragsid": {
+            "type": "string"
+          },
+          "dodsbo": {
+            "type": "boolean"
+          },
+          "boligkjoper": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "boligselger": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "prisantydning": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "salgssum": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "overtakelsesdato": {
+            "type": "string",
+            "format": "date"
+          },
+          "egenerklaringSignertdato": {
+            "type": "string",
+            "format": "date"
+          },
+          "eierform": {
+            "$ref": "#/components/schemas/KodeVerdi"
+          }
+        }
+      },
+      "Sikkerhetstiltak": {
+        "type": "object",
+        "properties": {
+          "kode": {
+            "type": "string"
+          },
+          "beskrivelse": {
+            "type": "string"
+          }
+        }
+      },
+      "Udb": {
+        "type": "object",
+        "properties": {
+          "udbkode": {
+            "type": "string"
+          },
+          "dekningsnummer": {
+            "type": "string"
+          },
+          "beskrivelse": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "Alternativ": {
+        "type": "object",
+        "properties": {
+          "verdi": {
+            "type": "string"
+          },
+          "beskrivelse": {
+            "type": "string"
+          },
+          "listerekkefolge": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nytegning": {
+            "type": "boolean"
+          },
+          "endring": {
+            "type": "boolean"
+          },
+          "standardverdi": {
+            "type": "boolean"
+          }
+        }
+      },
+      "BelopsUdb": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Udb"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "minimumsbelop": {
+                "type": "number",
+                "format": "double"
+              },
+              "maksimumsbelop": {
+                "type": "number",
+                "format": "double"
+              },
+              "standardbelop": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          }
+        ]
+      },
+      "Bil": {
+        "type": "object",
+        "properties": {
+          "kjorelengder": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Alternativ"
+            }
+          }
+        }
+      },
+      "Bygningstype": {
+        "type": "object",
+        "properties": {
+          "kode": {
+            "type": "string"
+          },
+          "beskrivelse": {
+            "type": "string"
+          },
+          "spesifikasjon": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Bygningsspesifikasjon"
+            }
+          },
+          "standardverdi": {
+            "type": "boolean"
+          },
+          "listerekkefolge": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "beskrivelseAlternativSalgskanal": {
+            "type": "string"
+          }
+        }
+      },
+      "Dekningsdetaljer": {
+        "type": "object",
+        "properties": {
+          "alderMax": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "forsikringssum": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Alternativ"
+            }
+          }
+        }
+      },
+      "Dekningsprodukt": {
+        "type": "object",
+        "properties": {
+          "nummer": {
+            "type": "string"
+          },
+          "navn": {
+            "type": "string"
+          },
+          "grunndekningsnummer": {
+            "type": "string"
+          },
+          "listerekkefolge": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "valgbar": {
+            "type": "boolean"
+          },
+          "egenandel": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Alternativ"
+            }
+          },
+          "udb": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/Udb"
+                },
+                {
+                  "$ref": "#/components/schemas/BelopsUdb"
+                },
+                {
+                  "$ref": "#/components/schemas/VerdierUdb"
+                }
+              ]
+            }
+          },
+          "utelukker": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "krever": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "forklaring": {
+            "type": "string"
+          },
+          "standardverdi": {
+            "type": "boolean"
+          },
+          "inkludert": {
+            "type": "boolean"
+          },
+          "kreves": {
+            "type": "boolean"
+          },
+          "dekningsdetaljer": {
+            "$ref": "#/components/schemas/Dekningsdetaljer"
+          },
+          "dekningsvariabel": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Dekningsvariabel"
+            }
+          }
+        }
+      },
+      "Risikoprodukt": {
+        "type": "object",
+        "properties": {
+          "nummer": {
+            "type": "string"
+          },
+          "navn": {
+            "type": "string"
+          },
+          "grunnrisiko": {
+            "type": "string"
+          },
+          "forsikringsprodukt": {
+            "type": "string"
+          },
+          "tilhorighet": {
+            "type": "string"
+          },
+          "dekningsprodukt": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Dekningsprodukt"
+            }
+          },
+          "sikkerhetstiltaksgruppe": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SikkerhetstiltakGruppe"
+            }
+          },
+          "utskrivningsnummer": {
+            "type": "string"
+          },
+          "ipidId": {
+            "type": "string"
+          }
+        },
+        "discriminator": {
+          "propertyName": "grunnrisiko"
+        }
+      },
+      "RisikoproduktBil": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Risikoprodukt"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "bil": {
+                "$ref": "#/components/schemas/Bil"
+              }
+            }
+          }
+        ]
+      },
+      "RisikoproduktBolig": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Risikoprodukt"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "bygningstype": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Bygningstype"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "SikkerhetstiltakGruppe": {
+        "type": "object",
+        "properties": {
+          "kode": {
+            "type": "string"
+          },
+          "beskrivelse": {
+            "type": "string"
+          },
+          "sikkerhetstiltak": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Sikkerhetstiltak"
+            }
+          }
+        }
+      },
+      "UdbAlternativ": {
+        "type": "object",
+        "properties": {
+          "kode": {
+            "type": "string"
+          },
+          "beskrivelse": {
+            "type": "string"
+          },
+          "standardverdi": {
+            "type": "boolean"
+          },
+          "tillattsolgt": {
+            "type": "boolean"
+          }
+        }
+      },
+      "VerdierUdb": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Udb"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "verdi": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UdbAlternativ"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "EnkelDekning": {
+        "type": "object",
+        "properties": {
+          "nr": {
+            "type": "string"
+          },
+          "produkt": {
+            "$ref": "#/components/schemas/KodeVerdi"
+          },
+          "grunndekningsnummer": {
+            "type": "string"
+          },
+          "egenandel": {
+            "$ref": "#/components/schemas/KodeVerdi"
+          }
+        }
+      },
+      "EnkelForsikring": {
+        "required": [
+          "nr"
+        ],
+        "type": "object",
+        "properties": {
+          "nr": {
+            "pattern": "^\\d{8}$",
+            "type": "string"
+          }
+        }
+      },
+      "EnkelRisiko": {
+        "type": "object",
+        "properties": {
+          "nr": {
+            "type": "string"
+          },
+          "produkt": {
+            "$ref": "#/components/schemas/KodeVerdi"
+          },
+          "produktgruppe": {
+            "$ref": "#/components/schemas/KodeVerdi"
+          },
+          "grunnrisiko": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "beskrivelse": {
+            "type": "string"
+          },
+          "premie": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "forsikring": {
+            "$ref": "#/components/schemas/EnkelForsikring"
+          },
+          "kunde": {
+            "$ref": "#/components/schemas/EnkelPart"
+          },
+          "dekning": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EnkelDekning"
+            }
+          },
+          "visningskontekst": {
+            "type": "string",
+            "enum": [
+              "FORSIKRINGSTAKER",
+              "MEDFORSIKRET",
+              "EKSA_FULL",
+              "EKSA_KOLLEKTIV"
+            ]
+          }
+        }
+      },
+      "BegunstigelseDekning": {
+        "required": [
+          "dekninger",
+          "rekkefolge",
+          "rekkefolgeKode"
+        ],
+        "type": "object",
+        "properties": {
+          "dekninger": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rekkefolge": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rekkefolgeKode": {
+            "type": "string"
+          },
+          "ytterligereBeskrivelse": {
+            "type": "string"
+          }
+        }
+      },
+      "BegunstigelseRisikoResponse": {
+        "required": [
+          "berettigedeDekninger",
+          "eier",
+          "forsikringsnr",
+          "risikobeskrivelse"
+        ],
+        "type": "object",
+        "properties": {
+          "forsikringsnr": {
+            "type": "string"
+          },
+          "eier": {
+            "type": "string"
+          },
+          "risikobeskrivelse": {
+            "type": "string"
+          },
+          "berettigedeDekninger": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BegunstigelseDekning"
+            }
+          }
+        }
+      },
+      "DetaljerteRisikoer": {
+        "required": [
+          "aktivTjenesteHelsehjelp",
+          "forsikringsnummer",
+          "risikoer",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "forsikringsnummer": {
+            "type": "string"
+          },
+          "aktivTjenesteHelsehjelp": {
+            "type": "boolean"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PRODUKSJON",
+              "KLADD",
+              "TILBUD",
+              "INAKTIV"
+            ]
+          },
+          "risikoer": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/Risiko"
+                },
+                {
+                  "$ref": "#/components/schemas/RisikoAnsvar"
+                },
+                {
+                  "$ref": "#/components/schemas/RisikoBaat"
+                },
+                {
+                  "$ref": "#/components/schemas/RisikoBolig"
+                },
+                {
+                  "$ref": "#/components/schemas/RisikoDriftstap"
+                },
+                {
+                  "$ref": "#/components/schemas/RisikoDyr"
+                },
+                {
+                  "$ref": "#/components/schemas/RisikoEiendeler"
+                },
+                {
+                  "$ref": "#/components/schemas/RisikoKjoretoy"
+                },
+                {
+                  "$ref": "#/components/schemas/RisikoKjoretoyGruppe"
+                },
+                {
+                  "$ref": "#/components/schemas/RisikoMaskin"
+                },
+                {
+                  "$ref": "#/components/schemas/RisikoPerson"
+                },
+                {
+                  "$ref": "#/components/schemas/RisikoPersonNaringsliv"
+                },
+                {
+                  "$ref": "#/components/schemas/RisikoProduksjon"
+                },
+                {
+                  "$ref": "#/components/schemas/RisikoReise"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "Reisekort": {
+        "required": [
+          "dekniger",
+          "erFtEllerSikretSomAnsatt",
+          "familiedekning",
+          "fnr",
+          "gjelderFraDato",
+          "medSikrede",
+          "risikoproduktnavn",
+          "rnr",
+          "sikret",
+          "utlopsdato"
+        ],
+        "type": "object",
+        "properties": {
+          "sikret": {
+            "$ref": "#/components/schemas/Sikret"
+          },
+          "medSikrede": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Sikret"
+            }
+          },
+          "fnr": {
+            "type": "string"
+          },
+          "rnr": {
+            "type": "string"
+          },
+          "risikoproduktnavn": {
+            "type": "string"
+          },
+          "familiedekning": {
+            "type": "boolean"
+          },
+          "utlopsdato": {
+            "type": "string",
+            "format": "date"
+          },
+          "dekniger": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Dekning"
+            }
+          },
+          "gjelderFraDato": {
+            "type": "string",
+            "format": "date"
+          },
+          "erFtEllerSikretSomAnsatt": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Sikret": {
+        "type": "object",
+        "properties": {
+          "partref": {
+            "type": "string"
+          },
+          "navn": {
+            "type": "string"
+          },
+          "rolle": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "PartrefOgAnnullertstatus": {
+        "type": "object",
+        "properties": {
+          "partref": {
+            "type": "string"
+          },
+          "navn": {
+            "type": "string"
+          },
+          "partkode": {
+            "type": "string"
+          },
+          "annullertDato": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "annullert": {
+            "type": "boolean"
+          }
+        }
+      },
+      "GroupedOnDemandObjects": {
+        "required": [
+          "batchId",
+          "date",
+          "documents",
+          "forsikringsnr",
+          "title",
+          "utsendelseDownloadId"
+        ],
+        "type": "object",
+        "properties": {
+          "forsikringsnr": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "documents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OnDemandObject"
+            }
+          },
+          "batchId": {
+            "type": "string"
+          },
+          "utsendelseDownloadId": {
+            "type": "string"
+          }
+        }
+      },
+      "OnDemandObject": {
+        "type": "object",
+        "properties": {
+          "batchId": {
+            "type": "string"
+          },
+          "dato": {
+            "type": "string",
+            "format": "date"
+          },
+          "b64EncodedDokId": {
+            "type": "string"
+          },
+          "doktypenr": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "doktypebeskrivelse": {
+            "type": "string"
+          },
+          "doktypebeskrivelseGui": {
+            "type": "string"
+          },
+          "folder": {
+            "type": "string"
+          },
+          "forsikringstype": {
+            "type": "string"
+          },
+          "forsikringsnr": {
+            "type": "string"
+          },
+          "kundenr": {
+            "type": "string"
+          },
+          "omslagssider": {
+            "type": "string"
+          },
+          "produkt": {
+            "type": "string"
+          },
+          "hendelse": {
+            "type": "string"
+          },
+          "downloadId": {
+            "type": "string"
+          }
+        }
+      },
+      "Modell": {
+        "required": [
+          "beskrivelse",
+          "kode",
+          "merkekode"
+        ],
+        "type": "object",
+        "properties": {
+          "kode": {
+            "type": "string"
+          },
+          "beskrivelse": {
+            "type": "string"
+          },
+          "aldersgrenseVedNytegning": {
+            "type": "number"
+          },
+          "aldersgrenseVedAnnullasjon": {
+            "type": "number"
+          },
+          "merkekode": {
+            "type": "string"
+          }
+        }
+      },
+      "Leverandor": {
+        "required": [
+          "dbsId",
+          "identifikasjon"
+        ],
+        "type": "object",
+        "properties": {
+          "identifikasjon": {
+            "$ref": "#/components/schemas/Identifikasjon"
+          },
+          "dbsId": {
+            "type": "string"
+          }
+        }
+      },
+      "ReiseforsikringStatus": {
+        "required": [
+          "forsikringsnr",
+          "fraDato",
+          "status",
+          "tilDato"
+        ],
+        "type": "object",
+        "properties": {
+          "forsikringsnr": {
+            "type": "string"
+          },
+          "fraDato": {
+            "type": "string",
+            "format": "date"
+          },
+          "tilDato": {
+            "type": "string",
+            "format": "date"
+          },
+          "status": {
+            "$ref": "#/components/schemas/PartrefOgAnnullertstatus"
+          }
+        }
+      },
+      "EArkivDocument": {
+        "required": [
+          "companyOwner",
+          "date",
+          "documentCode",
+          "earkivObjectId",
+          "read",
+          "svarskjemaer",
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "earkivObjectId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "read": {
+            "type": "boolean"
+          },
+          "svarskjemaer": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EArkivSvarskjema"
+            }
+          },
+          "documentId": {
+            "type": "string"
+          },
+          "documentCode": {
+            "type": "string"
+          },
+          "companyOwner": {
+            "type": "string"
+          },
+          "forsikringsnr": {
+            "type": "string"
+          },
+          "lopenr": {
+            "type": "string"
+          }
+        }
+      },
+      "EArkivSvarskjema": {
+        "required": [
+          "id",
+          "status",
+          "tittel"
+        ],
+        "type": "object",
+        "properties": {
+          "tittel": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "Brannkasse": {
+        "type": "object",
+        "properties": {
+          "nr": {
+            "type": "string"
+          },
+          "navn": {
+            "type": "string"
+          }
+        }
+      },
+      "RisikoOversikt": {
+        "type": "object",
+        "properties": {
+          "partref": {
+            "type": "string"
+          },
+          "forsikringnr": {
+            "type": "string"
+          },
+          "risikonr": {
+            "type": "string"
+          },
+          "produktrisikonr": {
+            "type": "string"
+          },
+          "produktrisikonavn": {
+            "type": "string"
+          },
+          "produktrisikogruppekode": {
+            "type": "string"
+          },
+          "produktrisikogruppebeskrivelse": {
+            "type": "string"
+          },
+          "grunnrisikonr": {
+            "type": "string"
+          },
+          "poliseproduktnr": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "utvidetBeskrivelse": {
+            "type": "string"
+          },
+          "premiesum": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "premiesumvaluta": {
+            "type": "string"
+          },
+          "opprinneligIkraftdato": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "gjeldertildato": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endretdato": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dekninger": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Dekning"
+            }
+          },
+          "tfa": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sendevei": {
+            "type": "string"
+          },
+          "detaljer": {
+            "$ref": "#/components/schemas/Risikodetaljer"
+          },
+          "kilde": {
+            "type": "string"
+          },
+          "brannkasse": {
+            "$ref": "#/components/schemas/Brannkasse"
+          }
+        }
+      },
+      "Risikodetaljer": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "opphoersaarsak": {
+            "type": "string"
+          },
+          "opphoersdato": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "kundensRollekode": {
+            "type": "string",
+            "enum": [
+              "EI",
+              "F",
+              "FF",
+              "FT",
+              "KJ",
+              "LV",
+              "LE",
+              "ML",
+              "PH",
+              "RE",
+              "SE",
+              "TS",
+              "TT"
+            ]
+          }
+        }
+      },
+      "SortableRisikogruppe": {
+        "required": [
+          "beskrivelse",
+          "risikoer"
+        ],
+        "type": "object",
+        "properties": {
+          "beskrivelse": {
+            "type": "string"
+          },
+          "risikoer": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RisikoOversikt"
+            }
+          },
+          "utskrivningsnummer": {
+            "type": "string"
+          }
+        }
+      },
+      "ForsikringsOversikt": {
+        "type": "object",
+        "properties": {
+          "forsikringer": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Forsikring"
+            }
+          }
+        }
+      }
+    }
+  }
+}

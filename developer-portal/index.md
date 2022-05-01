@@ -1,15 +1,23 @@
 ---
-title: Training program
+title: API Developer Portal
 ---
 
-# Training program
+## Achieve Gjensidige API Insight
+- Browse the Gjensidige API world in sidebar hierarchy
+- Do searches based on keyword
 
-This interactive training program is designed to help you understand how to create and edit content using Redocly's developer portal.
-It's a great companion to our [developer portal docs](https://docs.redoc.ly/developer-portal/introduction/).
+## Missing something
+- Tell code-owners in Gjensidige to contribute with 7 steps
+  - Use your frameworks openapi library [Inspiration & Hints](https://confluence.gjensidige.dev/confluence/display/GFIA/Alternative+Solutions+DP)
+  - After cloning repo, add config to your API in developer-portal/open-api
+  - Add actual openapi url reference to siteConfig.yaml
+  - Add Api Reference to sidebars.yaml
+  - Do a GitHub Pull Request
+  - Voila, you have shared important insight in Gjensidige Organization
+  - Send a url to this page to a secret friend
 
-Spend between an hour and a day playing with the most commonly utilized features.
 
-## Prerequisites
+## Prerequisites to Contribute
 - Basic Git and markdown knowledge
 - Node and yarn installed
 - A text editor or IDE (we like VS Code)
@@ -39,6 +47,13 @@ Or cherry-pick them independently if you're limited on time.
 
 Upon completion, you may have questions, or you may be ready to start building your content out.
 Learn how to [deploy the developer portal](https://docs.redoc.ly/ci-cd-workflows/) to our global CDN or contact us about purchasing an enterprise license key.
+
+# Training program
+
+This interactive training program is designed to help you understand how to create and edit content using Redocly's developer portal.
+It's a great companion to our [developer portal docs](https://docs.redoc.ly/developer-portal/introduction/).
+
+Spend between an hour and a day playing with the most commonly utilized features.
 
 ## Asking for help
 

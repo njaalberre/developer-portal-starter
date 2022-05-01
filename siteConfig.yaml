@@ -1,6 +1,6 @@
 meta:
-  title: Redocly Training
-  description: The best API documentation generator ever.
+  title:  Gjensidige Redocly Prototype
+  description: Probably the best API documentation portal ever.
   siteUrl: https://developer-portal-starter.redoc.ly
   keywords: redocly developer portal, api portal starter, api reference docs
   lang: en-US
@@ -9,12 +9,16 @@ linkChecker:
   options:
     CheckExternal: false
 logo:
-  image: ./images/logo.png
+  image: ./images/gjensidige-logo.svg
   altText: Redocly Training
 toc:
   enable: true
 oasDefinitions:
   petstore: ./openapi/petstore.yaml
+  api-anvendtanalyse: https://nl-claim-chat-analyzer-api.apps-int.testgjensidige.io/openapi.json
+  api-forsikringer: ./openapi/api-forsikringer.json
+  api-ruleengine: ./openapi/api-ruleengine.json
+
   # add links to definitions in our API registry by using a fully qualified URL.
 stylesheets:
   - https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700&display=swap
@@ -27,12 +31,12 @@ stylesheets:
 #  - ./static/intercom.js
 nav:
 
-  - label: Training exercises
+  - label: Gjensidige Developer Portal
     page: developer-portal/index.md
 
   - label: External docs
-    icon: ./images/redocly-icon-white.png
-    href: https://redoc.ly/docs/developer-portal/introduction/
+    icon: ./images/gjensidige-icon.png
+    href: https://confluence.gjensidige.dev/confluence/display/GFIA/Developer+Portal
 
   - search: true
 
@@ -53,3 +57,7 @@ footer:
           page: faq.md
         - label: Contact us
           page: contact.mdx
+seo:
+  title: Example Developer Portal
+  description: Learn how to work with Example APIs
+licenseKey: eyJ0Ijp0cnVlLCJpIjoxNjUxNDE3NDU1LCJlIjoxNjUzOTU1MjAwLCJoIjpbInJlZG9jLmx5IiwiZ2plbnNpZGlnZS5ubyAiXSwicyI6InBvcnRhbCJ9.Phqql8GZ1aJ5K9L0fx8Ck0Ym4/XObljNS/EPwi5FBPq4kp4cSE+RpLkAagdV4zOvzBNtjjkORugfAARr90PWjA==

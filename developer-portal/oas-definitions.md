@@ -43,6 +43,20 @@ type: reference-docs
 definitionId: petstore
 ```
 
+```yaml
+type: reference-docs
+definitionIdApiForsikringer: api-forsikringer
+```
+
+```yaml
+type: reference-docs
+definitionIdApiAnvendtanalyse: api-anvendtanalyse
+```
+```yaml
+type: reference-docs
+definitionIdApiRuleengine: api-ruleengine
+```
+
 That provides the additional metadata we need to render the API.
 
 Read the [docs](https://docs.redoc.ly/developer-portal/redoc-integration/) about the available properties, and how to utilize this page within the sidebar.
