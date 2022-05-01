@@ -15,7 +15,8 @@ toc:
   enable: true
 oasDefinitions:
   petstore: ./openapi/petstore.yaml
-  api-anvendtanalyse: https://nl-claim-chat-analyzer-api.apps-int.testgjensidige.io/openapi.json
+  #api-anvendtanalyse: https://nl-claim-chat-analyzer-api.apps-int.testgjensidige.io/openapi.json
+  api-anvendtanalyse: ./openapi/api-anvendtanalyse.json
   api-forsikringer: ./openapi/api-forsikringer.json
   api-ruleengine: ./openapi/api-ruleengine.json
 
